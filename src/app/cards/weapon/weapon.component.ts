@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-weapon',
+  selector: 'weapon',
   templateUrl: './weapon.component.html',
   styleUrls: ['./weapon.component.css']
 })

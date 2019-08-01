@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { WeaponComponent } from './weapon/weapon.component';
-import {MatIconModule} from "@angular/material";
+import { WeaponComponent } from './cards/weapon/weapon.component';
+import {MatButtonModule, MatIconModule} from "@angular/material";
 
 
 @NgModule({
@@ -14,7 +14,8 @@ import {MatIconModule} from "@angular/material";
   ],
   imports: [
     BrowserModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
