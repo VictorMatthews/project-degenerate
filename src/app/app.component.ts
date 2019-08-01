@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {WeaponComponent} from "./cards/weapon/weapon.component";
 
 @Component({
   selector: 'app-root',
@@ -8,5 +7,4 @@ import {WeaponComponent} from "./cards/weapon/weapon.component";
 })
 export class AppComponent {
   title = 'app';
-  weapons: MagicWeapon[];
 }

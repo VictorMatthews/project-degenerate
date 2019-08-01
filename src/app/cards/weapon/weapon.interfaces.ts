@@ -1,4 +1,4 @@
-export interface MagicWeapon {
+export interface GeneratedWeapon {
   weaponType: string;
   weaponFirstName: string;
   weaponSecondName: string;

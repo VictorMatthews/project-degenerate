@@ -4,18 +4,22 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { WeaponComponent } from './cards/weapon/weapon.component';
-import {MatButtonModule, MatIconModule} from "@angular/material";
+import { MatButtonModule, MatIconModule } from "@angular/material";
+import { MyWeaponsComponent } from './screens/my-weapons/my-weapons.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    WeaponComponent
+    WeaponComponent,
+    MyWeaponsComponent
   ],
   imports: [
     BrowserModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
