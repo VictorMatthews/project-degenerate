@@ -12,20 +12,20 @@ import {HttpClient} from "@angular/common/http";
 })
 export class MyWeaponsComponent implements OnInit {
   weapons: GeneratedWeapon[];
-  weaponAttributes: any;
-  weaponNames: any;
-  makerAttributes: any;
+  weaponAttributes: WeaponAttributes[];
+  weaponNames: WeaponNames;
+  makerAttributes: MakerAttributes;
 
   constructor(public http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get('../../resources/weaponAttributes.json').subscribe(data => {
+    this.http.get('../../resources/weaponAttributes.json').subscribe((data: WeaponAttributes[]) => {
       this.weaponAttributes = data;
     });
-    this.http.get('../../resources/weaponNames.json').subscribe(data => {
+    this.http.get('../../resources/weaponNames.json').subscribe((data: WeaponNames) => {
       this.weaponNames = data;
     });
-    this.http.get('../../resources/makerAttributes.json').subscribe(data => {
+    this.http.get('../../resources/makerAttributes.json').subscribe((data: MakerAttributes) => {
       this.makerAttributes = data;
     });
   }
