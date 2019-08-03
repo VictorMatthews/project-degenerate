@@ -1,6 +1,6 @@
 [
   {
-    "type": "sword",
+    "type": "Sword",
     "weaponQuality": [
       "The hilt is perfectly balanced, and when held on one’s fingers, it always points North.",
       "The blade is freezing to the touch, and anyone it strikes will feel that cold agony.",
@@ -51,7 +51,7 @@
     ]
   },
   {
-    "type": "rapier",
+    "type": "Rapier",
     "weaponQuality": [
       "This is a duelist’s sword. Drawing a line in the sand with it grants the wielder advantage on their next Charisma check.",
       "This rapier’s blade can be made malleable and whiplike at will. The wielder can treat it as a rapier or a whip.",
@@ -102,7 +102,7 @@
     ]
   },
   {
-    "type": "axe",
+    "type": "Axe",
     "weaponQuality": [
       "This axe dangles from a heavy, magical chain. If thrown, it can be pulled back to its wielder with a flick of the chain.",
       "This axe is designed for boarding ships. It grants advantage on any checks made to climb wooden surfaces.",
@@ -153,7 +153,7 @@
     ]
   },
   {
-    "type": "hamaul",
+    "type": "Hammer/Maul",
     "weaponQuality": [
       "This hammer is particularly adept at breaking bones, and reduces the target’s movement speed on critical hits.",
       "This weapon reacts to nearby gold pieces, giving off a shimmering aura when more than 100 gold coins are near.",
@@ -204,7 +204,7 @@
     ]
   },
   {
-    "type": "bow",
+    "type": "Bow",
     "weaponQuality": [
       "Blades protrude from this bow, allowing it to be used as a melee weapon in a pinch.",
       "Arrows nocked to this bow immediately burst into flames, and deal fire damage on hit.",
@@ -255,7 +255,7 @@
     ]
   },
   {
-    "type": "crossbow",
+    "type": "Crossbow",
     "weaponQuality": [
       "This repeating crossbow can fire three shots without being reloaded.",
       "The ironsights and long barrel on this crossbow extend its effective range by 50 percent.",
@@ -306,7 +306,7 @@
     ]
   },
   {
-    "type": "spear",
+    "type": "Spear",
     "weaponQuality": [
       "This weapon is lighter than it looks, and allows you to reach further than many other spears.",
       "This weapon splits in the middle at the wielder’s behest, becoming two javelins.",
@@ -357,7 +357,7 @@
     ]
   },
   {
-    "type": "dagger",
+    "type": "Dagger",
     "weaponQuality": [
       "When its wielder wills it, this dagger becomes a light source similar to a torch, yet only the bearer can see it. To everyone else, the environment remains dark.",
       "This set of two daggers is extremely magical. The wielder can teleport between the two blades, making knife-throwing an interesting endeavor on the battlefield.",
@@ -408,7 +408,7 @@
     ]
   },
   {
-    "type": "quarterstaff",
+    "type": "Quarterstaff",
     "weaponQuality": [
       "This staff looks regal, and it allows you to be more successful when trying to convince others that you’re more important than you are. This staff grants advantage on Persuasion checks in social situations.",
       "This staff is an exceptional walking stick, and allows you to traverse the countryside quicker than usual. Using this while traveling allows a normal pace while still allowing the use of stealth.",

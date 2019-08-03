@@ -1,0 +1,28 @@
+
+
+.background {
+  background-image: url(../../resources/parchment.jpeg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  position: fixed !important;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.scroll {
+  overflow: scroll;
+}
+
+.generated-weapons {
+  padding-bottom: 10px;
+}
+
+.new-weapon-button {
+  color: antiquewhite;
+  background-color: darkslategrey;
+  right: 20px;
+  bottom: 20px;
+  position: fixed !important;
+}
