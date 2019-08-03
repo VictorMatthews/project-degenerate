@@ -10,10 +10,10 @@ First to run this app you will need [npm](https://www.npmjs.com/get-npm) and [gi
 
 Clone this repo with git by running `git clone https://github.com/VictorMatthews/project-degenerate.git`
 
-Open that directory in your terminal and run `npm install` followed by `npm serve`
+Open that directory in your terminal and run `npm install` followed by `npm start`
 
 From there all you have to do is open a browser and navigate to [localhost:4200](http://localhost:4200/)
 
 This app was designed for mobile and looks best in a skinny browser. Just click the add button and watch new weapons get generated 
 
-![The app should look like this one launched](/src/assets/app-screenshot.png)
+![app-screenshot](/src/assets/app-screenshot.png)
