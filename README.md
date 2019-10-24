@@ -16,4 +16,4 @@ From there all you have to do is open a browser and navigate to [localhost:4200]
 
 This app was designed for mobile and looks best in a skinny browser. Just click the add button and watch new weapons get generated 
 
-![app-screenshot](/src/assets/app-screenshot.png)
+![app-screenshot](src/assets/screenshots/app-screenshot.png)

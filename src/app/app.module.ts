@@ -3,26 +3,36 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { WeaponComponent } from './cards/weapon/weapon.component';
-import { MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, MatListModule } from "@angular/material";
-import { GenerateWeaponsComponent } from './screens/generate-weapons/generate-weapons.component';
+import { WeaponComponent } from './generate-weapons/weapon/weapon.component';
+import { GenerateWeaponsComponent } from './generate-weapons/generate-weapons.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from "./shared/modules/material.module";
+import { MenuComponent } from "./menu/menu.component";
+import { HomeComponent } from "./home/home.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AppRoutingModule } from "./app-routing.module";
+import { CharactersComponent } from './characters/characters.component';
+import { CharacterComponent } from './characters/character/character.component';
+import { CreateCharacterComponent } from './characters/create-character/create-character.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    MenuComponent,
+    GenerateWeaponsComponent,
     WeaponComponent,
-    GenerateWeaponsComponent
+    CharactersComponent,
+    CharacterComponent,
+    CreateCharacterComponent,
   ],
   imports: [
     BrowserModule,
-    MatIconModule,
-    MatButtonModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    MaterialModule,
     HttpClientModule,
-    MatCardModule,
-    MatDividerModule,
-    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

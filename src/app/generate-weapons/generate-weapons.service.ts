@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import WeaponAttributesData from '../../resources/weaponAttributes.json';
-import WeaponNamesData from '../../resources/weaponNames.json';
-import MakerAttributesData from '../../resources/makerAttributes.json';
-import {GeneratedWeapon, MakerAttributes, WeaponAttributes, WeaponNames} from "../../cards/weapon/weapon.interfaces";
+import WeaponAttributesData from '../shared/resources/weaponAttributes.json';
+import WeaponNamesData from '../shared/resources/weaponNames.json';
+import MakerAttributesData from '../shared/resources/makerAttributes.json';
+import {GeneratedWeapon, MakerAttributes, WeaponAttributes, WeaponNames} from "./weapon/weapon.interfaces";
 
 @Injectable({
   providedIn: 'root'

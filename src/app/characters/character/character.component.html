@@ -1,0 +1,72 @@
+<div class="character-info">
+
+  <div class="race-class">
+    <div class="race">
+      <label class="label">Race:</label>
+      {{getRace()}}
+    </div>
+    <div class="class">
+      <label class="label">Class: </label>
+      {{character.className}}
+    </div>
+  </div>
+
+  <div class="attributes">
+    <div class="strength">
+      <div class="label">Strength</div>
+      {{character.strength}}
+    </div>
+    <div class="dexterity">
+      <div class="label">Dexterity</div>
+      {{character.dexterity}}
+    </div>
+    <div class="constitution">
+      <div class="label">Constitution</div>
+      {{character.constitution}}
+    </div>
+    <div class="intelligence">
+      <div class="label">Intelligence</div>
+      {{character.intelligence}}
+    </div>
+    <div class="wisdom">
+      <div class="label">Wisdom</div>
+      {{character.wisdom}}
+    </div>
+    <div class="charisma">
+      <div class="label">Charisma</div>
+      {{character.charisma}}
+    </div>
+  </div>
+
+  <div class="background-info">
+    <div class="background">
+      <div class="label">Background</div>
+      {{character.background}}
+    </div>
+    <div class="personalityTrait">
+      <div class="label">Personality Trait</div>
+      {{character.personalityTrait}}
+    </div>
+    <div class="ideals">
+      <div class="label">Ideals</div>
+      {{character.ideals}}
+    </div>
+    <div class="bonds">
+      <div class="label">Bonds</div>
+      {{character.bonds}}
+    </div>
+    <div class="flaws">
+      <div class="label">Flaws</div>
+      {{character.flaws}}
+    </div>
+  </div>
+
+  <div class="skills">
+    <div *ngFor="let skill of skills">
+      <label class="skill-modifier">{{service.getSkillModifierForCharacter(skill)}}</label>
+      <mat-radio-button class="skill-radio-button" [value]="skill.toString()" [disabled]="true" [checked]="service.isProficientSKill(skill)">
+        {{skill.toString()}}
+      </mat-radio-button>
+    </div>
+  </div>
+</div>

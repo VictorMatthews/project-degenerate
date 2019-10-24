@@ -1,0 +1,14 @@
+<div *ngIf="!state.isCreatingCharacter" class="characters">
+  <div class="character-list">
+    <p>characters works!</p>
+  </div>
+  <div class="character-display">
+    <app-character [character]="state.selectedCharacter"></app-character>
+  </div>
+
+  <button mat-fab class="new-character-button" (click)="state.createCharacter()">
+    <i class="fas fa-plus"></i>
+  </button>
+</div>
+
+<app-create-character *ngIf="state.isCreatingCharacter"></app-create-character>

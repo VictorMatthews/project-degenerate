@@ -1,0 +1,12 @@
+@import '../../../variables';
+
+.weapon-card {
+  margin: 10px;
+  border-radius: 4px;
+  background-color: $accent1;
+  padding: 10px 10px 10px 10px;
+}
+
+.weapon-card-header {
+  color: $black;
+}

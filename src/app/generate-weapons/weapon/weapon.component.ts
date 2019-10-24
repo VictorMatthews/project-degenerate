@@ -2,9 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {GeneratedWeapon} from "./weapon.interfaces";
 
 @Component({
-  selector: 'weapon',
+  selector: 'app-weapon',
   templateUrl: './weapon.component.html',
-  styleUrls: ['./weapon.component.css']
+  styleUrls: ['./weapon.component.scss']
 })
 export class WeaponComponent implements OnInit {
 

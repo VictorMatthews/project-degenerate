@@ -1,0 +1,15 @@
+<div id="menu">
+    <div class="navigate">
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                <li *ngFor="let navLink of navigationLinks" [ngClass]="isActive(navLink.path)" (click)="navigateTo(navLink.path, navLink.navType)">
+                    <div class="nav {{navLink.className}}">
+                        <mat-icon fontSet="{{navLink.fontSet}}" fontIcon="{{navLink.fontIcon}}"></mat-icon>
+                        {{navLink.label}}
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
