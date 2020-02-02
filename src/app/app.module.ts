@@ -14,6 +14,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { CharactersComponent } from './characters/characters.component';
 import { CharacterComponent } from './characters/character/character.component';
 import { CreateCharacterComponent } from './characters/create-character/create-character.component';
+import {DialogService} from "./shared/services/dialog-service";
 
 
 @NgModule({
@@ -34,7 +35,12 @@ import { CreateCharacterComponent } from './characters/create-character/create-c
     MaterialModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    DialogService,
+  ],
+  entryComponents: [
+    CreateCharacterComponent,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

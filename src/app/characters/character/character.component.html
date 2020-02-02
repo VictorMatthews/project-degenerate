@@ -12,29 +12,29 @@
   </div>
 
   <div class="attributes">
-    <div class="strength">
+    <div class="attribute strength" [class.attribute-mobile]="ui.isMobile()">
       <div class="label">Strength</div>
-      {{character.strength}}
+      <div class="value">{{character.strength}}</div>
     </div>
-    <div class="dexterity">
+    <div class="attribute dexterity" [class.attribute-mobile]="ui.isMobile()">
       <div class="label">Dexterity</div>
-      {{character.dexterity}}
+      <div class="value">{{character.dexterity}}</div>
     </div>
-    <div class="constitution">
+    <div class="attribute constitution" [class.attribute-mobile]="ui.isMobile()">
       <div class="label">Constitution</div>
-      {{character.constitution}}
+      <div class="value">{{character.constitution}}</div>
     </div>
-    <div class="intelligence">
+    <div class="attribute intelligence" [class.attribute-mobile]="ui.isMobile()">
       <div class="label">Intelligence</div>
-      {{character.intelligence}}
+      <div class="value">{{character.intelligence}}</div>
     </div>
-    <div class="wisdom">
+    <div class="attribute wisdom" [class.attribute-mobile]="ui.isMobile()">
       <div class="label">Wisdom</div>
-      {{character.wisdom}}
+      <div class="value">{{character.wisdom}}</div>
     </div>
-    <div class="charisma">
+    <div class="attribute charisma" [class.attribute-mobile]="ui.isMobile()">
       <div class="label">Charisma</div>
-      {{character.charisma}}
+      <div class="value">{{character.charisma}}</div>
     </div>
   </div>
 

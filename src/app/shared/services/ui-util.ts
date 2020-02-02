@@ -1,3 +1,5 @@
+import {MatDialogConfig} from "@angular/material/dialog";
+
 export class UiUtil {
 
   // See: https://github.com/angular/flex-layout/wiki/Responsive-API
@@ -77,5 +79,17 @@ export class UiUtil {
   static isScreenGtLg(): boolean {
     const screenWidth = window.innerWidth;
     return screenWidth >= 1920;
+  }
+
+  static setDialogSizeMax(config: MatDialogConfig = {}): MatDialogConfig {
+    if (UiUtil.isHandheld() || UiUtil.isTablet()) {
+      config.width = "100%";
+      config.height = "100%";
+      config.maxWidth = "100%";
+    } else {
+      config.width = "80%";
+      config.height = "80%";
+    }
+    return config;
   }
 }

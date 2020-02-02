@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Character, Constants, Skill } from "../characters.interfaces";
+import { Character, CharacterConstants, Skill } from "../characters.interfaces";
 import { Ui } from "../../shared/services/ui.service";
 import {CharactersService} from "../characters.service";
 
@@ -10,7 +10,7 @@ import {CharactersService} from "../characters.service";
 })
 export class CharacterComponent implements OnInit {
   @Input() character: Character;
-  skills: Skill[] = Constants.skills.getSkills();
+  skills: Skill[] = CharacterConstants.skills.getSkills();
 
   constructor(public ui: Ui, public service: CharactersService) { }
 

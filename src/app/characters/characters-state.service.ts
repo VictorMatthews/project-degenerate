@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Character, Constants } from "./characters.interfaces";
+import { Character, CharacterConstants } from "./characters.interfaces";
+import { CreateCharacterComponent } from "./create-character/create-character.component";
+import { DialogService } from "../shared/services/dialog-service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +11,23 @@ export class CharactersStateService {
   selectedCharacter: Character = null;
   createdCharacters: Character[] = [];
 
-  constructor() { }
+  constructor(private dialogService: DialogService) { }
 
   public createCharacter() {
     this.isCreatingCharacter = true;
+    const dialog = this.dialogService.openFullScreen<CreateCharacterComponent>(CreateCharacterComponent);
+    dialog.afterClosed().subscribe((newCharacter: Character) => {
+      if (this.newCharacterComplete(newCharacter)) {
+        this.selectedCharacter = newCharacter;
+        this.createdCharacters.push(newCharacter);
+      }
+    });
   }
 
   public loadCharacters() {
     this.createdCharacters = [
       {
+        isCharacterComplete: true,
         characterName: 'Aifur Gott',
         background: 'Criminal',
         race: 'Gnome',
@@ -39,7 +49,7 @@ export class CharactersStateService {
         bonds: 'My ill-gotten gains go to support my family.',
         flaws: 'When I see something valuable, I can\'t think about anything but how to steal it.',
 
-        profSkills: [Constants.skills.PERCEPTION],
+        profSkills: [CharacterConstants.skills.PERCEPTION],
         increaseAttributes: [],
       }
     ];
@@ -49,5 +59,12 @@ export class CharactersStateService {
     if (this.createdCharacters.length !== 0) {
       this.selectedCharacter = this.createdCharacters[0];
     }
+  }
+
+  newCharacterComplete(newCharacter: Character) {
+    if (newCharacter !== undefined && newCharacter !== null) {
+      return newCharacter.isCharacterComplete;
+    }
+    return false;
   }
 }

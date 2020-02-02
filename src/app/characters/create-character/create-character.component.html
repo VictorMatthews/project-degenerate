@@ -1,1 +1,36 @@
-<p>create-character works!</p>
+<div mat-dialog-title>
+  {{choiceMap.get(currentChoice).getString()}}
+</div>
+
+<div mat-dialog-content class="content">
+  <div *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.RACE">
+    <div class="classChoices">
+      <div *ngFor="let race of races">
+        
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.SUB_RACE">
+    Sub Race Works!
+  </div>
+
+  <div *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.CLASS">
+    Class Works!
+  </div>
+
+  <div *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.BACKGROUND">
+
+  </div>
+
+  <div *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.ATTRIBUTES_SKILLS">
+
+  </div>
+</div>
+
+<mat-dialog-actions align="end" class="actions">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="previous()" [disabled]="!canGoBack()">Previous</button>
+  <button mat-button (click)="next()" [disabled]="!canGoForward()">Next</button>
+  <button mat-button [mat-dialog-close]="newCharacter" [disabled]="!readyToFinish()">Finish</button>
+</mat-dialog-actions>

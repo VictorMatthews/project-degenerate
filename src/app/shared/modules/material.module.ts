@@ -9,6 +9,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material';
 import { MatDividerModule } from "@angular/material/divider";
 import { MatRadioModule } from "@angular/material/radio";
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [],
@@ -22,6 +23,7 @@ import { MatRadioModule } from "@angular/material/radio";
     MatListModule,
     MatRadioModule,
     MatSidenavModule,
+    MatDialogModule,
   ],
   exports: [
     MatButtonModule,
@@ -32,6 +34,7 @@ import { MatRadioModule } from "@angular/material/radio";
     MatListModule,
     MatRadioModule,
     MatSidenavModule,
-  ]
+    MatDialogModule,
+  ],
 })
 export class MaterialModule { }

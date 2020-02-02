@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CharactersStateService } from "./characters-state.service";
-import { Attribute, Constants, Skill } from "./characters.interfaces";
+import { Attribute, CharacterConstants, Skill } from "./characters.interfaces";
 
 @Injectable({
   providedIn: 'root'
@@ -81,22 +81,22 @@ export class CharactersService {
   }
 
   private getSkillValue(skill: Skill) {
-    if (skill.getAttributeMod().equals(Constants.attributes.STRENGTH)) {
+    if (skill.getAttributeMod().equals(CharacterConstants.attributes.STRENGTH)) {
       return this.state.selectedCharacter.strength;
     }
-    if (skill.getAttributeMod().equals(Constants.attributes.DEXTERITY)) {
+    if (skill.getAttributeMod().equals(CharacterConstants.attributes.DEXTERITY)) {
       return this.state.selectedCharacter.dexterity;
     }
-    if (skill.getAttributeMod().equals(Constants.attributes.CONSTITUTION)) {
+    if (skill.getAttributeMod().equals(CharacterConstants.attributes.CONSTITUTION)) {
       return this.state.selectedCharacter.constitution;
     }
-    if (skill.getAttributeMod().equals(Constants.attributes.INTELLIGENCE)) {
+    if (skill.getAttributeMod().equals(CharacterConstants.attributes.INTELLIGENCE)) {
       return this.state.selectedCharacter.intelligence;
     }
-    if (skill.getAttributeMod().equals(Constants.attributes.WISDOM)) {
+    if (skill.getAttributeMod().equals(CharacterConstants.attributes.WISDOM)) {
       return this.state.selectedCharacter.wisdom;
     }
-    if (skill.getAttributeMod().equals(Constants.attributes.CHARISMA)) {
+    if (skill.getAttributeMod().equals(CharacterConstants.attributes.CHARISMA)) {
       return this.state.selectedCharacter.charisma;
     }
   }

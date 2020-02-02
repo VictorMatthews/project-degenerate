@@ -1,4 +1,5 @@
 export interface Character {
+  isCharacterComplete: boolean;
   characterName: string;
   background: string;
   race: string;
@@ -86,24 +87,24 @@ export class Skill {
 }
 
 export class Skills {
-  readonly ACROBATICS = new Skill( 1, 'Acrobatics', Constants.attributes.DEXTERITY);
-  readonly ANIMAL_HANDLING = new Skill( 2, 'Animal Handling', Constants.attributes.WISDOM);
-  readonly ARCANA = new Skill( 3, 'Arcana', Constants.attributes.INTELLIGENCE);
-  readonly ATHLETICS = new Skill( 4, 'Athletics', Constants.attributes.STRENGTH);
-  readonly DECEPTION = new Skill( 5, 'Deception', Constants.attributes.CHARISMA);
-  readonly HISTORY = new Skill( 6, 'History', Constants.attributes.INTELLIGENCE);
-  readonly INSIGHT = new Skill( 7, 'Insight', Constants.attributes.WISDOM);
-  readonly INTIMIDATION = new Skill( 8, 'Intimidation', Constants.attributes.CHARISMA);
-  readonly INVESTIGATION = new Skill( 9, 'Investigation', Constants.attributes.INTELLIGENCE);
-  readonly MEDICINE = new Skill(10, 'Medicine', Constants.attributes.WISDOM);
-  readonly NATURE = new Skill(11, 'Nature', Constants.attributes.INTELLIGENCE);
-  readonly PERCEPTION = new Skill(12, 'Perception', Constants.attributes.WISDOM);
-  readonly PERFORMANCE = new Skill(13, 'Performance', Constants.attributes.CHARISMA);
-  readonly PERSUASION = new Skill(14, 'Persuasion', Constants.attributes.CHARISMA);
-  readonly RELIGION = new Skill(15, 'Religion', Constants.attributes.INTELLIGENCE);
-  readonly SLEIGHT_OF_HAND = new Skill(16, 'Sleight of Hand', Constants.attributes.DEXTERITY);
-  readonly STEALTH = new Skill(17, 'Stealth', Constants.attributes.DEXTERITY);
-  readonly SURVIVAL = new Skill(18, 'Survival', Constants.attributes.WISDOM);
+  readonly ACROBATICS = new Skill( 1, 'Acrobatics', CharacterConstants.attributes.DEXTERITY);
+  readonly ANIMAL_HANDLING = new Skill( 2, 'Animal Handling', CharacterConstants.attributes.WISDOM);
+  readonly ARCANA = new Skill( 3, 'Arcana', CharacterConstants.attributes.INTELLIGENCE);
+  readonly ATHLETICS = new Skill( 4, 'Athletics', CharacterConstants.attributes.STRENGTH);
+  readonly DECEPTION = new Skill( 5, 'Deception', CharacterConstants.attributes.CHARISMA);
+  readonly HISTORY = new Skill( 6, 'History', CharacterConstants.attributes.INTELLIGENCE);
+  readonly INSIGHT = new Skill( 7, 'Insight', CharacterConstants.attributes.WISDOM);
+  readonly INTIMIDATION = new Skill( 8, 'Intimidation', CharacterConstants.attributes.CHARISMA);
+  readonly INVESTIGATION = new Skill( 9, 'Investigation', CharacterConstants.attributes.INTELLIGENCE);
+  readonly MEDICINE = new Skill(10, 'Medicine', CharacterConstants.attributes.WISDOM);
+  readonly NATURE = new Skill(11, 'Nature', CharacterConstants.attributes.INTELLIGENCE);
+  readonly PERCEPTION = new Skill(12, 'Perception', CharacterConstants.attributes.WISDOM);
+  readonly PERFORMANCE = new Skill(13, 'Performance', CharacterConstants.attributes.CHARISMA);
+  readonly PERSUASION = new Skill(14, 'Persuasion', CharacterConstants.attributes.CHARISMA);
+  readonly RELIGION = new Skill(15, 'Religion', CharacterConstants.attributes.INTELLIGENCE);
+  readonly SLEIGHT_OF_HAND = new Skill(16, 'Sleight of Hand', CharacterConstants.attributes.DEXTERITY);
+  readonly STEALTH = new Skill(17, 'Stealth', CharacterConstants.attributes.DEXTERITY);
+  readonly SURVIVAL = new Skill(18, 'Survival', CharacterConstants.attributes.WISDOM);
 
   public getSkills(): Skill[] {
     return [this.ACROBATICS, this.ANIMAL_HANDLING, this.ARCANA, this.ATHLETICS, this.DECEPTION, this.HISTORY,
@@ -113,12 +114,13 @@ export class Skills {
 }
 
 export class Race {
-  constructor(readonly raceId: number, readonly raceName?: string, readonly speed?: number, readonly increaseAttribute?: CharacterAttribute[], readonly raceInfo?: RaceInfo) {
+  constructor(readonly raceId: number, readonly raceName?: string, readonly speed?: number, readonly increaseAttribute?: CharacterAttribute[], readonly raceInfo?: RaceInfo, readonly hasSubRaces?: boolean) {
     this.raceId = raceId;
     this.raceName = raceName;
     this.speed = speed;
     this.increaseAttribute = increaseAttribute;
     this.raceInfo = raceInfo;
+    this.hasSubRaces = hasSubRaces;
   }
 
   public getRaceName(): string {
@@ -137,28 +139,36 @@ export class Race {
     return this.raceInfo;
   }
 
+  public getHasSubRaces(): boolean {
+    return this.hasSubRaces;
+  }
+
   public toString() {
     return this.raceName;
   }
 }
 
 export class Races {
-  readonly DWARF = new Race(1, 'Dwarf', 25, [{attribute: Constants.attributes.CONSTITUTION, increaseValue: 2}], Constants.raceInfos.DWARF);
-  readonly ELF = new Race(2, 'Elf', 30, [{attribute: Constants.attributes.DEXTERITY, increaseValue: 2}], Constants.raceInfos.ELF);
-  readonly HALFLING = new Race(3, 'Halfling', 25, [{attribute: Constants.attributes.DEXTERITY, increaseValue: 2}], Constants.raceInfos.HALFLING);
-  readonly HUMAN = new Race(4, 'Human', 30, this.populateHumanAttributes(), Constants.raceInfos.HUMAN);
-  readonly DRAGONBORN = new Race(5, 'Dragonborn', 30, [{attribute: Constants.attributes.STRENGTH, increaseValue: 2},{attribute: Constants.attributes.CHARISMA, increaseValue: 1}], Constants.raceInfos.DRAGONBORN);
-  readonly GNOME = new Race(6, 'Gnome', 25, [{attribute: Constants.attributes.INTELLIGENCE, increaseValue: 2}], Constants.raceInfos.GNOME);
-  readonly HALF_ELF = new Race(7, 'Half Elf', 30, [{attribute: Constants.attributes.CHARISMA, increaseValue: 2}], Constants.raceInfos.HALF_ELF);
-  readonly HALF_ORC = new Race(8, 'Half Orc', 30, [{attribute: Constants.attributes.STRENGTH, increaseValue: 2},{attribute: Constants.attributes.CONSTITUTION, increaseValue: 1}], Constants.raceInfos.HALF_ORC);
-  readonly TIEFLING= new Race(9, 'Tiefling', 30, [{attribute: Constants.attributes.CHARISMA, increaseValue: 2},{attribute: Constants.attributes.INTELLIGENCE, increaseValue: 1}], Constants.raceInfos.TIEFLING);
+  readonly DWARF = new Race(1, 'Dwarf', 25, [{attribute: CharacterConstants.attributes.CONSTITUTION, increaseValue: 2}], CharacterConstants.raceInfos.DWARF, true);
+  readonly ELF = new Race(2, 'Elf', 30, [{attribute: CharacterConstants.attributes.DEXTERITY, increaseValue: 2}], CharacterConstants.raceInfos.ELF, true);
+  readonly HALFLING = new Race(3, 'Halfling', 25, [{attribute: CharacterConstants.attributes.DEXTERITY, increaseValue: 2}], CharacterConstants.raceInfos.HALFLING, true);
+  readonly HUMAN = new Race(4, 'Human', 30, this.populateHumanAttributes(), CharacterConstants.raceInfos.HUMAN, false);
+  readonly DRAGONBORN = new Race(5, 'Dragonborn', 30, [{attribute: CharacterConstants.attributes.STRENGTH, increaseValue: 2},{attribute: CharacterConstants.attributes.CHARISMA, increaseValue: 1}], CharacterConstants.raceInfos.DRAGONBORN, false);
+  readonly GNOME = new Race(6, 'Gnome', 25, [{attribute: CharacterConstants.attributes.INTELLIGENCE, increaseValue: 2}], CharacterConstants.raceInfos.GNOME, true);
+  readonly HALF_ELF = new Race(7, 'Half Elf', 30, [{attribute: CharacterConstants.attributes.CHARISMA, increaseValue: 2}], CharacterConstants.raceInfos.HALF_ELF, false);
+  readonly HALF_ORC = new Race(8, 'Half Orc', 30, [{attribute: CharacterConstants.attributes.STRENGTH, increaseValue: 2},{attribute: CharacterConstants.attributes.CONSTITUTION, increaseValue: 1}], CharacterConstants.raceInfos.HALF_ORC, false);
+  readonly TIEFLING= new Race(9, 'Tiefling', 30, [{attribute: CharacterConstants.attributes.CHARISMA, increaseValue: 2},{attribute: CharacterConstants.attributes.INTELLIGENCE, increaseValue: 1}], CharacterConstants.raceInfos.TIEFLING, false);
 
   private populateHumanAttributes(): CharacterAttribute[] {
     let humanAttributes: CharacterAttribute[] = [];
-    for (let attr of Constants.attributes.getAttributes().reverse()) {
+    for (let attr of CharacterConstants.attributes.getAttributes().reverse()) {
       humanAttributes.push({attribute: attr, increaseValue: 1})
     }
     return humanAttributes;
+  }
+
+  public getRaces(): Race[] {
+    return [this.DWARF, this.ELF, this.HALFLING, this.HUMAN, this.DRAGONBORN, this.GNOME, this.HALF_ELF, this.HALF_ORC, this.TIEFLING];
   }
 }
 
@@ -193,15 +203,15 @@ export class SubRace {
 
 export class SubRaces {
   readonly NO_SUBRACE = new SubRace(0);
-  readonly HILL_DWARF = new SubRace(Constants.races.DWARF.getRaceId(), 'Hill Dwarf', [{attribute: Constants.attributes.WISDOM, increaseValue: 1}], Constants.raceInfos.HILL_DWARF);
-  readonly MOUNTAIN_DWARF = new SubRace(Constants.races.DWARF.getRaceId(), 'Mountain Dwarf', [{attribute: Constants.attributes.STRENGTH, increaseValue: 2}], Constants.raceInfos.MOUNTAIN_DWARF);
-  readonly HIGH_ELF = new SubRace(Constants.races.ELF.getRaceId(), 'High Elf', [{attribute: Constants.attributes.INTELLIGENCE, increaseValue: 1}], Constants.raceInfos.HIGH_ELF);
-  readonly WOOD_ELF = new SubRace(Constants.races.ELF.getRaceId(), 'Wood Elf', [{attribute: Constants.attributes.WISDOM, increaseValue: 1}], Constants.raceInfos.WOOD_ELF);
-  readonly DARK_ELF = new SubRace(Constants.races.ELF.getRaceId(), 'Dark Elf (Drow)', [{attribute: Constants.attributes.CHARISMA, increaseValue: 1}], Constants.raceInfos.DARK_ELF);
-  readonly LIGHT_FOOT_HALFLING = new SubRace(Constants.races.HALFLING.getRaceId(), 'Lightfoot Halfling', [{attribute: Constants.attributes.CHARISMA, increaseValue: 1}], Constants.raceInfos.LIGHT_FOOT_HALFLING);
-  readonly STOUT_HALFLING = new SubRace(Constants.races.HALFLING.getRaceId(), 'Stout Halfling', [{attribute: Constants.attributes.CONSTITUTION, increaseValue: 1}], Constants.raceInfos.STOUT_HALFLING);
-  readonly ROCK_GNOME = new SubRace(Constants.races.GNOME.getRaceId(), 'Rock Gnome', [{attribute: Constants.attributes.CONSTITUTION, increaseValue: 1}], Constants.raceInfos.ROCK_GNOME);
-  readonly FOREST_GNOME = new SubRace(Constants.races.GNOME.getRaceId(), 'Forest Gnome', [{attribute: Constants.attributes.DEXTERITY, increaseValue: 1}], Constants.raceInfos.FOREST_GNOME);
+  readonly HILL_DWARF = new SubRace(CharacterConstants.races.DWARF.getRaceId(), 'Hill Dwarf', [{attribute: CharacterConstants.attributes.WISDOM, increaseValue: 1}], CharacterConstants.raceInfos.HILL_DWARF);
+  readonly MOUNTAIN_DWARF = new SubRace(CharacterConstants.races.DWARF.getRaceId(), 'Mountain Dwarf', [{attribute: CharacterConstants.attributes.STRENGTH, increaseValue: 2}], CharacterConstants.raceInfos.MOUNTAIN_DWARF);
+  readonly HIGH_ELF = new SubRace(CharacterConstants.races.ELF.getRaceId(), 'High Elf', [{attribute: CharacterConstants.attributes.INTELLIGENCE, increaseValue: 1}], CharacterConstants.raceInfos.HIGH_ELF);
+  readonly WOOD_ELF = new SubRace(CharacterConstants.races.ELF.getRaceId(), 'Wood Elf', [{attribute: CharacterConstants.attributes.WISDOM, increaseValue: 1}], CharacterConstants.raceInfos.WOOD_ELF);
+  readonly DARK_ELF = new SubRace(CharacterConstants.races.ELF.getRaceId(), 'Dark Elf (Drow)', [{attribute: CharacterConstants.attributes.CHARISMA, increaseValue: 1}], CharacterConstants.raceInfos.DARK_ELF);
+  readonly LIGHT_FOOT_HALFLING = new SubRace(CharacterConstants.races.HALFLING.getRaceId(), 'Lightfoot Halfling', [{attribute: CharacterConstants.attributes.CHARISMA, increaseValue: 1}], CharacterConstants.raceInfos.LIGHT_FOOT_HALFLING);
+  readonly STOUT_HALFLING = new SubRace(CharacterConstants.races.HALFLING.getRaceId(), 'Stout Halfling', [{attribute: CharacterConstants.attributes.CONSTITUTION, increaseValue: 1}], CharacterConstants.raceInfos.STOUT_HALFLING);
+  readonly ROCK_GNOME = new SubRace(CharacterConstants.races.GNOME.getRaceId(), 'Rock Gnome', [{attribute: CharacterConstants.attributes.CONSTITUTION, increaseValue: 1}], CharacterConstants.raceInfos.ROCK_GNOME);
+  readonly FOREST_GNOME = new SubRace(CharacterConstants.races.GNOME.getRaceId(), 'Forest Gnome', [{attribute: CharacterConstants.attributes.DEXTERITY, increaseValue: 1}], CharacterConstants.raceInfos.FOREST_GNOME);
 }
 
 export class Class {
@@ -216,18 +226,18 @@ export class Class {
 }
 
 export class Classes {
-  readonly BARBARIAN = new Class('Barbarian', 12, Constants.classInfos.BARBARIAN,2, [Constants.skills.ANIMAL_HANDLING, Constants.skills.ATHLETICS, Constants.skills.INTIMIDATION, Constants.skills.NATURE, Constants.skills.PERCEPTION, Constants.skills.SURVIVAL], [Constants.attributes.STRENGTH, Constants.attributes.CONSTITUTION]);
-  readonly BARD = new Class('Bard', 12, Constants.classInfos.BARD,3, Constants.skills.getSkills(), [Constants.attributes.DEXTERITY, Constants.attributes.CHARISMA]);
-  readonly CLERIC = new Class('Cleric', 12, Constants.classInfos.CLERIC,2,[Constants.skills.HISTORY, Constants.skills.INSIGHT, Constants.skills.MEDICINE,Constants.skills.PERSUASION, Constants.skills.RELIGION],[Constants.attributes.WISDOM, Constants.attributes.CHARISMA]);
-  readonly DRUID = new Class('Druid', 12, Constants.classInfos.DRUID,2,[Constants.skills.ARCANA, Constants.skills.INSIGHT, Constants.skills.ANIMAL_HANDLING,Constants.skills.MEDICINE, Constants.skills.NATURE, Constants.skills.PERCEPTION,Constants.skills.RELIGION, Constants.skills.SURVIVAL],[Constants.attributes.INTELLIGENCE, Constants.attributes.WISDOM]);
-  readonly FIGHTER = new Class('Fighter',12, Constants.classInfos.FIGHTER,2,[Constants.skills.ACROBATICS, Constants.skills.ANIMAL_HANDLING, Constants.skills.ATHLETICS,Constants.skills.HISTORY, Constants.skills.INSIGHT, Constants.skills.INTIMIDATION,Constants.skills.PERCEPTION, Constants.skills.SURVIVAL],[Constants.attributes.STRENGTH, Constants.attributes.CONSTITUTION]);
-  readonly MONK = new Class('Monk', 12, Constants.classInfos.MONK,2,[Constants.skills.ACROBATICS, Constants.skills.ATHLETICS, Constants.skills.HISTORY,Constants.skills.INSIGHT, Constants.skills.RELIGION, Constants.skills.STEALTH],[Constants.attributes.STRENGTH, Constants.attributes.DEXTERITY]);
-  readonly PALADIN = new Class('Paladin', 12, Constants.classInfos.PALADIN,2,[Constants.skills.ATHLETICS, Constants.skills.INSIGHT, Constants.skills.INTIMIDATION,Constants.skills.MEDICINE, Constants.skills.PERSUASION, Constants.skills.RELIGION],[Constants.attributes.WISDOM, Constants.attributes.CHARISMA]);
-  readonly RANGER = new Class('Ranger', 12, Constants.classInfos.RANGER,3,[Constants.skills.ANIMAL_HANDLING, Constants.skills.ATHLETICS, Constants.skills.INSIGHT,Constants.skills.INVESTIGATION, Constants.skills.NATURE, Constants.skills.PERCEPTION,Constants.skills.STEALTH, Constants.skills.SURVIVAL],[Constants.attributes.STRENGTH, Constants.attributes.DEXTERITY]);
-  readonly ROGUE = new Class('Rogue', 12, Constants.classInfos.ROGUE,4,[Constants.skills.ACROBATICS, Constants.skills.ATHLETICS, Constants.skills.DECEPTION,Constants.skills.INSIGHT, Constants.skills.INTIMIDATION, Constants.skills.INVESTIGATION,Constants.skills.PERCEPTION, Constants.skills.PERFORMANCE, Constants.skills.PERSUASION,Constants.skills.SLEIGHT_OF_HAND, Constants.skills.STEALTH],[Constants.attributes.DEXTERITY, Constants.attributes.INTELLIGENCE]);
-  readonly SORCERER = new Class('Sorcerer', 12, Constants.classInfos.SORCERER,2,[Constants.skills.ARCANA, Constants.skills.DECEPTION, Constants.skills.INSIGHT,Constants.skills.INTIMIDATION, Constants.skills.PERSUASION, Constants.skills.RELIGION],[Constants.attributes.CONSTITUTION, Constants.attributes.CHARISMA]);
-  readonly WARLOCK = new Class('Warlock', 12, Constants.classInfos.WARLOCK,2,[Constants.skills.ARCANA, Constants.skills.DECEPTION, Constants.skills.HISTORY,Constants.skills.INTIMIDATION, Constants.skills.INVESTIGATION, Constants.skills.NATURE,Constants.skills.RELIGION],[Constants.attributes.WISDOM, Constants.attributes.CHARISMA]);
-  readonly WIZARD = new Class('Wizard', 12, Constants.classInfos.WIZARD,2,[Constants.skills.ARCANA, Constants.skills.HISTORY, Constants.skills.INSIGHT,Constants.skills.INVESTIGATION, Constants.skills.MEDICINE, Constants.skills.RELIGION],[Constants.attributes.INTELLIGENCE, Constants.attributes.WISDOM]);
+  readonly BARBARIAN = new Class('Barbarian', 12, CharacterConstants.classInfos.BARBARIAN,2, [CharacterConstants.skills.ANIMAL_HANDLING, CharacterConstants.skills.ATHLETICS, CharacterConstants.skills.INTIMIDATION, CharacterConstants.skills.NATURE, CharacterConstants.skills.PERCEPTION, CharacterConstants.skills.SURVIVAL], [CharacterConstants.attributes.STRENGTH, CharacterConstants.attributes.CONSTITUTION]);
+  readonly BARD = new Class('Bard', 12, CharacterConstants.classInfos.BARD,3, CharacterConstants.skills.getSkills(), [CharacterConstants.attributes.DEXTERITY, CharacterConstants.attributes.CHARISMA]);
+  readonly CLERIC = new Class('Cleric', 12, CharacterConstants.classInfos.CLERIC,2,[CharacterConstants.skills.HISTORY, CharacterConstants.skills.INSIGHT, CharacterConstants.skills.MEDICINE,CharacterConstants.skills.PERSUASION, CharacterConstants.skills.RELIGION],[CharacterConstants.attributes.WISDOM, CharacterConstants.attributes.CHARISMA]);
+  readonly DRUID = new Class('Druid', 12, CharacterConstants.classInfos.DRUID,2,[CharacterConstants.skills.ARCANA, CharacterConstants.skills.INSIGHT, CharacterConstants.skills.ANIMAL_HANDLING,CharacterConstants.skills.MEDICINE, CharacterConstants.skills.NATURE, CharacterConstants.skills.PERCEPTION,CharacterConstants.skills.RELIGION, CharacterConstants.skills.SURVIVAL],[CharacterConstants.attributes.INTELLIGENCE, CharacterConstants.attributes.WISDOM]);
+  readonly FIGHTER = new Class('Fighter',12, CharacterConstants.classInfos.FIGHTER,2,[CharacterConstants.skills.ACROBATICS, CharacterConstants.skills.ANIMAL_HANDLING, CharacterConstants.skills.ATHLETICS,CharacterConstants.skills.HISTORY, CharacterConstants.skills.INSIGHT, CharacterConstants.skills.INTIMIDATION,CharacterConstants.skills.PERCEPTION, CharacterConstants.skills.SURVIVAL],[CharacterConstants.attributes.STRENGTH, CharacterConstants.attributes.CONSTITUTION]);
+  readonly MONK = new Class('Monk', 12, CharacterConstants.classInfos.MONK,2,[CharacterConstants.skills.ACROBATICS, CharacterConstants.skills.ATHLETICS, CharacterConstants.skills.HISTORY,CharacterConstants.skills.INSIGHT, CharacterConstants.skills.RELIGION, CharacterConstants.skills.STEALTH],[CharacterConstants.attributes.STRENGTH, CharacterConstants.attributes.DEXTERITY]);
+  readonly PALADIN = new Class('Paladin', 12, CharacterConstants.classInfos.PALADIN,2,[CharacterConstants.skills.ATHLETICS, CharacterConstants.skills.INSIGHT, CharacterConstants.skills.INTIMIDATION,CharacterConstants.skills.MEDICINE, CharacterConstants.skills.PERSUASION, CharacterConstants.skills.RELIGION],[CharacterConstants.attributes.WISDOM, CharacterConstants.attributes.CHARISMA]);
+  readonly RANGER = new Class('Ranger', 12, CharacterConstants.classInfos.RANGER,3,[CharacterConstants.skills.ANIMAL_HANDLING, CharacterConstants.skills.ATHLETICS, CharacterConstants.skills.INSIGHT,CharacterConstants.skills.INVESTIGATION, CharacterConstants.skills.NATURE, CharacterConstants.skills.PERCEPTION,CharacterConstants.skills.STEALTH, CharacterConstants.skills.SURVIVAL],[CharacterConstants.attributes.STRENGTH, CharacterConstants.attributes.DEXTERITY]);
+  readonly ROGUE = new Class('Rogue', 12, CharacterConstants.classInfos.ROGUE,4,[CharacterConstants.skills.ACROBATICS, CharacterConstants.skills.ATHLETICS, CharacterConstants.skills.DECEPTION,CharacterConstants.skills.INSIGHT, CharacterConstants.skills.INTIMIDATION, CharacterConstants.skills.INVESTIGATION,CharacterConstants.skills.PERCEPTION, CharacterConstants.skills.PERFORMANCE, CharacterConstants.skills.PERSUASION,CharacterConstants.skills.SLEIGHT_OF_HAND, CharacterConstants.skills.STEALTH],[CharacterConstants.attributes.DEXTERITY, CharacterConstants.attributes.INTELLIGENCE]);
+  readonly SORCERER = new Class('Sorcerer', 12, CharacterConstants.classInfos.SORCERER,2,[CharacterConstants.skills.ARCANA, CharacterConstants.skills.DECEPTION, CharacterConstants.skills.INSIGHT,CharacterConstants.skills.INTIMIDATION, CharacterConstants.skills.PERSUASION, CharacterConstants.skills.RELIGION],[CharacterConstants.attributes.CONSTITUTION, CharacterConstants.attributes.CHARISMA]);
+  readonly WARLOCK = new Class('Warlock', 12, CharacterConstants.classInfos.WARLOCK,2,[CharacterConstants.skills.ARCANA, CharacterConstants.skills.DECEPTION, CharacterConstants.skills.HISTORY,CharacterConstants.skills.INTIMIDATION, CharacterConstants.skills.INVESTIGATION, CharacterConstants.skills.NATURE,CharacterConstants.skills.RELIGION],[CharacterConstants.attributes.WISDOM, CharacterConstants.attributes.CHARISMA]);
+  readonly WIZARD = new Class('Wizard', 12, CharacterConstants.classInfos.WIZARD,2,[CharacterConstants.skills.ARCANA, CharacterConstants.skills.HISTORY, CharacterConstants.skills.INSIGHT,CharacterConstants.skills.INVESTIGATION, CharacterConstants.skills.MEDICINE, CharacterConstants.skills.RELIGION],[CharacterConstants.attributes.INTELLIGENCE, CharacterConstants.attributes.WISDOM]);
 }
 
 export class Background {
@@ -255,19 +265,19 @@ export class Background {
 }
 
 export class Backgrounds {
-  readonly ACOLYTE = new Background( 1, 'Acolyte', [Constants.skills.INSIGHT,Constants.skills.RELIGION]);
-  readonly CHARLATAN = new Background( 2, 'Charlatan', [Constants.skills.DECEPTION,Constants.skills.SLEIGHT_OF_HAND]);
-  readonly CRIMINAL = new Background( 3, 'Criminal', [Constants.skills.DECEPTION,Constants.skills.STEALTH]);
-  readonly ENTERTAINER = new Background( 4, 'Entertainer', [Constants.skills.ACROBATICS,Constants.skills.PERFORMANCE]);
-  readonly FOLK_HERO = new Background( 5, 'Folk Hero', [Constants.skills.ANIMAL_HANDLING,Constants.skills.SURVIVAL]);
-  readonly GUILD_ARTISAN = new Background( 6, 'Guild Artisan', [Constants.skills.INSIGHT,Constants.skills.PERSUASION]);
-  readonly HERMIT = new Background( 7, 'Hermit', [Constants.skills.MEDICINE,Constants.skills.RELIGION]);
-  readonly NOBLE = new Background( 8, 'Noble', [Constants.skills.HISTORY,Constants.skills.PERSUASION]);
-  readonly OUTLANDER = new Background( 9, 'Outlander', [Constants.skills.ATHLETICS,Constants.skills.SURVIVAL]);
-  readonly SAGE = new Background(10, 'Sage', [Constants.skills.ARCANA,Constants.skills.HISTORY]);
-  readonly SAILOR = new Background(11, 'Sailor', [Constants.skills.ATHLETICS,Constants.skills.PERCEPTION]);
-  readonly SOLDIER = new Background(12, 'Soldier', [Constants.skills.ATHLETICS,Constants.skills.INTIMIDATION]);
-  readonly URCHIN = new Background(13, 'Urchin', [Constants.skills.SLEIGHT_OF_HAND,Constants.skills.STEALTH]);
+  readonly ACOLYTE = new Background( 1, 'Acolyte', [CharacterConstants.skills.INSIGHT,CharacterConstants.skills.RELIGION]);
+  readonly CHARLATAN = new Background( 2, 'Charlatan', [CharacterConstants.skills.DECEPTION,CharacterConstants.skills.SLEIGHT_OF_HAND]);
+  readonly CRIMINAL = new Background( 3, 'Criminal', [CharacterConstants.skills.DECEPTION,CharacterConstants.skills.STEALTH]);
+  readonly ENTERTAINER = new Background( 4, 'Entertainer', [CharacterConstants.skills.ACROBATICS,CharacterConstants.skills.PERFORMANCE]);
+  readonly FOLK_HERO = new Background( 5, 'Folk Hero', [CharacterConstants.skills.ANIMAL_HANDLING,CharacterConstants.skills.SURVIVAL]);
+  readonly GUILD_ARTISAN = new Background( 6, 'Guild Artisan', [CharacterConstants.skills.INSIGHT,CharacterConstants.skills.PERSUASION]);
+  readonly HERMIT = new Background( 7, 'Hermit', [CharacterConstants.skills.MEDICINE,CharacterConstants.skills.RELIGION]);
+  readonly NOBLE = new Background( 8, 'Noble', [CharacterConstants.skills.HISTORY,CharacterConstants.skills.PERSUASION]);
+  readonly OUTLANDER = new Background( 9, 'Outlander', [CharacterConstants.skills.ATHLETICS,CharacterConstants.skills.SURVIVAL]);
+  readonly SAGE = new Background(10, 'Sage', [CharacterConstants.skills.ARCANA,CharacterConstants.skills.HISTORY]);
+  readonly SAILOR = new Background(11, 'Sailor', [CharacterConstants.skills.ATHLETICS,CharacterConstants.skills.PERCEPTION]);
+  readonly SOLDIER = new Background(12, 'Soldier', [CharacterConstants.skills.ATHLETICS,CharacterConstants.skills.INTIMIDATION]);
+  readonly URCHIN = new Background(13, 'Urchin', [CharacterConstants.skills.SLEIGHT_OF_HAND,CharacterConstants.skills.STEALTH]);
 }
 
 export class RaceInfo {
@@ -326,7 +336,7 @@ export class ClassInfos {
   readonly WIZARD = new ClassInfo('');
 }
 
-export class Constants {
+export class CharacterConstants {
   public static attributes = new Attributes();
   public static raceInfos = new RaceInfos();
   public static classInfos = new ClassInfos();
