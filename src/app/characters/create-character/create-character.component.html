@@ -4,10 +4,15 @@
 
 <div mat-dialog-content class="content">
   <div *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.RACE">
-    <div class="classChoices">
-      <div *ngFor="let race of races">
-        
+    <div class="left-side">
+      <div *ngIf="races">
+        <div class="pad-5">
+          <app-race-card *ngFor="let race of races" [race]="race" (click)="selectRace(race)"></app-race-card>
+        </div>
       </div>
+    </div>
+    <div class="right-side">
+      <app-race-detail *ngIf="selectedRace" [race]="selectedRace"></app-race-detail>
     </div>
   </div>
 

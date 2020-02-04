@@ -212,6 +212,21 @@ export class SubRaces {
   readonly STOUT_HALFLING = new SubRace(CharacterConstants.races.HALFLING.getRaceId(), 'Stout Halfling', [{attribute: CharacterConstants.attributes.CONSTITUTION, increaseValue: 1}], CharacterConstants.raceInfos.STOUT_HALFLING);
   readonly ROCK_GNOME = new SubRace(CharacterConstants.races.GNOME.getRaceId(), 'Rock Gnome', [{attribute: CharacterConstants.attributes.CONSTITUTION, increaseValue: 1}], CharacterConstants.raceInfos.ROCK_GNOME);
   readonly FOREST_GNOME = new SubRace(CharacterConstants.races.GNOME.getRaceId(), 'Forest Gnome', [{attribute: CharacterConstants.attributes.DEXTERITY, increaseValue: 1}], CharacterConstants.raceInfos.FOREST_GNOME);
+
+  public getSubRaces(race?: Race): SubRace[] {
+    if (race) {
+      if (race === CharacterConstants.races.DWARF) {
+        return [this.HILL_DWARF, this.MOUNTAIN_DWARF];
+      } else if (race === CharacterConstants.races.ELF) {
+        return [this.HIGH_ELF, this.WOOD_ELF, this.DARK_ELF];
+      } else if (race === CharacterConstants.races.HALFLING) {
+        return [this.LIGHT_FOOT_HALFLING, this.STOUT_HALFLING];
+      } else if (race === CharacterConstants.races.GNOME) {
+        return [this.ROCK_GNOME, this.FOREST_GNOME];
+      }
+    }
+    return [this.NO_SUBRACE, this.HILL_DWARF, this.MOUNTAIN_DWARF, this.HIGH_ELF, this.WOOD_ELF, this.DARK_ELF, this.LIGHT_FOOT_HALFLING, this.STOUT_HALFLING, this.ROCK_GNOME, this.FOREST_GNOME];
+  }
 }
 
 export class Class {
@@ -238,6 +253,11 @@ export class Classes {
   readonly SORCERER = new Class('Sorcerer', 12, CharacterConstants.classInfos.SORCERER,2,[CharacterConstants.skills.ARCANA, CharacterConstants.skills.DECEPTION, CharacterConstants.skills.INSIGHT,CharacterConstants.skills.INTIMIDATION, CharacterConstants.skills.PERSUASION, CharacterConstants.skills.RELIGION],[CharacterConstants.attributes.CONSTITUTION, CharacterConstants.attributes.CHARISMA]);
   readonly WARLOCK = new Class('Warlock', 12, CharacterConstants.classInfos.WARLOCK,2,[CharacterConstants.skills.ARCANA, CharacterConstants.skills.DECEPTION, CharacterConstants.skills.HISTORY,CharacterConstants.skills.INTIMIDATION, CharacterConstants.skills.INVESTIGATION, CharacterConstants.skills.NATURE,CharacterConstants.skills.RELIGION],[CharacterConstants.attributes.WISDOM, CharacterConstants.attributes.CHARISMA]);
   readonly WIZARD = new Class('Wizard', 12, CharacterConstants.classInfos.WIZARD,2,[CharacterConstants.skills.ARCANA, CharacterConstants.skills.HISTORY, CharacterConstants.skills.INSIGHT,CharacterConstants.skills.INVESTIGATION, CharacterConstants.skills.MEDICINE, CharacterConstants.skills.RELIGION],[CharacterConstants.attributes.INTELLIGENCE, CharacterConstants.attributes.WISDOM]);
+
+  public getClasses(): Class[] {
+    return [this.BARBARIAN, this.BARD, this.CLERIC, this.DRUID, this.FIGHTER, this.MONK,
+      this.PALADIN, this.RANGER, this.ROGUE, this.SORCERER, this.WARLOCK, this.WIZARD];
+  }
 }
 
 export class Background {
@@ -282,17 +302,18 @@ export class Backgrounds {
 
 export class RaceInfo {
   constructor(readonly raceName: string, readonly abilityScoreIncrease?: string, readonly age?: string,
-              readonly alignment?: string, readonly size?: string) {
+              readonly alignment?: string, readonly size?: string, readonly speed?: string) {
     this.raceName = raceName;
     this.abilityScoreIncrease = abilityScoreIncrease;
     this.age = age;
     this.alignment = alignment;
     this.size = size;
+    this.speed = speed;
   }
 }
 
 export class RaceInfos {
-  readonly DWARF = new RaceInfo('');
+  readonly DWARF = new RaceInfo('Dwarf', 'Your Constitution score increases by 2.', 'Dwarves mature at the same rate as humans, but they are considered young until they reach the age of 50. On average, they live about 350 years.', 'Most dwarves are lawful, believing firmly in the benefits of a well-ordered society. They tend toward good as well, with a strong sense of Fair Play and a belief that everyone deserves to share in the benefits of a just order.', 'Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.', 'Your base walking speed is 25 feet. Your speed is not reduced by wearing Heavy Armor.');
   readonly ELF = new RaceInfo('');
   readonly HALFLING = new RaceInfo('');
   readonly HUMAN = new RaceInfo('');
@@ -344,4 +365,5 @@ export class CharacterConstants {
   public static subRaces = new SubRaces();
   public static skills = new Skills();
   public static backgrounds = new Backgrounds();
+  public static classes = new Classes();
 }

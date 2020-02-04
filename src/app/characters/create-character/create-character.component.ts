@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Character, CharacterConstants, Class, Race, Races, SubRace} from "../characters.interfaces";
+import {Character, CharacterConstants, Class, Race, SubRace} from "../characters.interfaces";
 import { Ui } from "../../shared/services/ui.service";
 import { Constant } from "../../shared/constants/constants";
 
@@ -16,6 +16,8 @@ export class CreateCharacterComponent implements OnInit {
   selectedSubRace: SubRace;
   selectedClass: Class;
   races: Race[] = CharacterConstants.races.getRaces();
+  subRaces: SubRace[];
+  classes: Class[] = CharacterConstants.classes.getClasses();
 
   constructor(public ui: Ui) { }
 
@@ -65,5 +67,10 @@ export class CreateCharacterComponent implements OnInit {
 
   readyToFinish() {
     return false;
+  }
+
+  selectRace(race: Race) {
+    this.selectedRace = race;
+    this.subRaces = CharacterConstants.subRaces.getSubRaces(race);
   }
 }

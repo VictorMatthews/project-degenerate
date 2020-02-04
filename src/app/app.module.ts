@@ -14,7 +14,9 @@ import { AppRoutingModule } from "./app-routing.module";
 import { CharactersComponent } from './characters/characters.component';
 import { CharacterComponent } from './characters/character/character.component';
 import { CreateCharacterComponent } from './characters/create-character/create-character.component';
-import {DialogService} from "./shared/services/dialog-service";
+import { DialogService } from "./shared/services/dialog-service";
+import { RaceDetailComponent } from './characters/race/race-detail/race-detail.component';
+import { RaceCardComponent } from './characters/race/race-card/race-card.component';
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import {DialogService} from "./shared/services/dialog-service";
     CharactersComponent,
     CharacterComponent,
     CreateCharacterComponent,
+    RaceDetailComponent,
+    RaceCardComponent,
   ],
   imports: [
     BrowserModule,
