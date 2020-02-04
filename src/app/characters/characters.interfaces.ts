@@ -234,8 +234,8 @@ export class Class {
     this.className = className;
     this.hitDie = hitDie;
     this.classInfo = classInfo;
-    this.profSkillsToChoose = profSkillsToChoose;
-    this.skillChoices = skillChoices;
+    // this.profSkillsToChoose = profSkillsToChoose;
+    // this.skillChoices = skillChoices;
     this.savingThrows = savingThrows;
   }
 }
@@ -314,56 +314,79 @@ export class RaceInfo {
 
 export class RaceInfos {
   readonly DWARF = new RaceInfo('Dwarf', 'Your Constitution score increases by 2.', 'Dwarves mature at the same rate as humans, but they are considered young until they reach the age of 50. On average, they live about 350 years.', 'Most dwarves are lawful, believing firmly in the benefits of a well-ordered society. They tend toward good as well, with a strong sense of Fair Play and a belief that everyone deserves to share in the benefits of a just order.', 'Dwarves stand between 4 and 5 feet tall and average about 150 pounds. Your size is Medium.', 'Your base walking speed is 25 feet. Your speed is not reduced by wearing Heavy Armor.');
-  readonly ELF = new RaceInfo('');
-  readonly HALFLING = new RaceInfo('');
-  readonly HUMAN = new RaceInfo('');
-  readonly DRAGONBORN = new RaceInfo('');
-  readonly GNOME = new RaceInfo('');
-  readonly HALF_ELF = new RaceInfo('');
-  readonly HALF_ORC = new RaceInfo('');
-  readonly TIEFLING = new RaceInfo('');
-  readonly HILL_DWARF = new RaceInfo('');
-  readonly MOUNTAIN_DWARF = new RaceInfo('');
-  readonly HIGH_ELF = new RaceInfo('');
-  readonly WOOD_ELF = new RaceInfo('');
-  readonly DARK_ELF = new RaceInfo('');
-  readonly LIGHT_FOOT_HALFLING = new RaceInfo('');
-  readonly STOUT_HALFLING = new RaceInfo('');
-  readonly ROCK_GNOME = new RaceInfo('');
-  readonly FOREST_GNOME = new RaceInfo('');
+  readonly ELF = new RaceInfo('Elf');
+  readonly HALFLING = new RaceInfo('Halfling');
+  readonly HUMAN = new RaceInfo('Human');
+  readonly DRAGONBORN = new RaceInfo('Dragonborn');
+  readonly GNOME = new RaceInfo('Gnome');
+  readonly HALF_ELF = new RaceInfo('Half Elf');
+  readonly HALF_ORC = new RaceInfo('Half Orc');
+  readonly TIEFLING = new RaceInfo('Tiefling');
+  readonly HILL_DWARF = new RaceInfo('Hill Dwarf', 'Your Wisdom score increases by 1.');
+  readonly MOUNTAIN_DWARF = new RaceInfo('Mountain Dwarf', 'Your Strength score increases by 2.');
+  readonly HIGH_ELF = new RaceInfo('High Elf');
+  readonly WOOD_ELF = new RaceInfo('Wood Elf');
+  readonly DARK_ELF = new RaceInfo('Dark Elf');
+  readonly LIGHT_FOOT_HALFLING = new RaceInfo('Lightfoot Halfling');
+  readonly STOUT_HALFLING = new RaceInfo('Stout Halfling');
+  readonly ROCK_GNOME = new RaceInfo('Rock Gnome');
+  readonly FOREST_GNOME = new RaceInfo('Forest Gnome');
 }
 
 export class ClassInfo {
-  constructor(readonly className: string, readonly armor?: string, readonly weapons?: string, readonly tools?: string) {
+  constructor(readonly className: string, readonly hitDice?: string, readonly hitPointLevelOne?: string,
+              readonly hitPointHigherLevel?: string, readonly armor?: string, readonly weapons?: string,
+              readonly tools?: string, readonly profSkillsToChoose?: number, readonly skillChoices?: Skill[], readonly skills?: string) {
     this.className = className;
+    this.hitDice = hitDice;
+    this.hitPointLevelOne = hitPointLevelOne;
+    this.hitPointHigherLevel = hitPointHigherLevel;
     this.armor = armor;
     this.weapons = weapons;
     this.tools = tools;
+    this.profSkillsToChoose = profSkillsToChoose;
+    this.skillChoices = skillChoices;
+    this.skills = this.getSkills();
+  }
+
+  private getSkills(): string {
+    let skills = "";
+    if (this.skillChoices !== undefined && this.profSkillsToChoose !== undefined) {
+      for (let i = 0; i < this.skillChoices.length; i++) {
+        let comma = ", ";
+        if (i + 1 == this.skillChoices.length) {
+          comma = "";
+        }
+        skills = skills + this.skillChoices[i] + comma;
+      }
+      return "Choose " + this.profSkillsToChoose + " from " + skills;
+    }
+    return skills;
   }
 }
 
 export class ClassInfos {
-  readonly BARBARIAN = new ClassInfo('');
-  readonly BARD = new ClassInfo('');
-  readonly CLERIC = new ClassInfo('');
-  readonly DRUID = new ClassInfo('');
-  readonly FIGHTER = new ClassInfo('');
-  readonly MONK = new ClassInfo('');
-  readonly PALADIN = new ClassInfo('');
-  readonly RANGER = new ClassInfo('');
-  readonly ROGUE = new ClassInfo('');
-  readonly SORCERER = new ClassInfo('');
-  readonly WARLOCK = new ClassInfo('');
-  readonly WIZARD = new ClassInfo('');
+  readonly BARBARIAN = new ClassInfo('Barbarian', '1d12 per barbarian level', '12 + your Constitution modifier', '1d12 (or 7) + your Constitution modifier per barbarian level after 1st', 'Light Armor, Medium Armor, shields', 'Simple Weapons, Martial Weapons', 'None', 2, [CharacterConstants.skills.ANIMAL_HANDLING, CharacterConstants.skills.ATHLETICS, CharacterConstants.skills.INTIMIDATION, CharacterConstants.skills.NATURE, CharacterConstants.skills.PERCEPTION, CharacterConstants.skills.SURVIVAL]);
+  readonly BARD = new ClassInfo('Bard');
+  readonly CLERIC = new ClassInfo("Cleric");
+  readonly DRUID = new ClassInfo('Druid');
+  readonly FIGHTER = new ClassInfo('Fighter');
+  readonly MONK = new ClassInfo('Monk');
+  readonly PALADIN = new ClassInfo('Paladin');
+  readonly RANGER = new ClassInfo('Ranger');
+  readonly ROGUE = new ClassInfo('Rogue');
+  readonly SORCERER = new ClassInfo('Sorcerer');
+  readonly WARLOCK = new ClassInfo('Warlock');
+  readonly WIZARD = new ClassInfo('Wizard');
 }
 
 export class CharacterConstants {
   public static attributes = new Attributes();
   public static raceInfos = new RaceInfos();
-  public static classInfos = new ClassInfos();
   public static races = new Races();
   public static subRaces = new SubRaces();
   public static skills = new Skills();
+  public static classInfos = new ClassInfos();
   public static backgrounds = new Backgrounds();
   public static classes = new Classes();
 }

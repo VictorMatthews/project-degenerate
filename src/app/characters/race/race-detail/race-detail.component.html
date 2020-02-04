@@ -1,26 +1,28 @@
 <div class="detailBackground">
   <div class="grid">
-    <div class="title">{{race.getRaceName()}}</div>
+    <div class="title">{{race.getRaceInfo().raceName}}</div>
 
     <div class="header ability-header">Ability Score Increase:</div>
 
     <div class="paragraph ability-paragraph">{{race.getRaceInfo().abilityScoreIncrease}}</div>
 
-    <div class="header age-header">Age:</div>
+    <div *ngIf="race.hasSubRaces !== undefined">
+      <div class="header age-header">Age:</div>
 
-    <div class="paragraph age-paragraph">{{race.getRaceInfo().age}}</div>
+      <div class="paragraph age-paragraph">{{race.getRaceInfo().age}}</div>
 
-    <div class="header alignment-header">Alignment:</div>
+      <div class="header alignment-header">Alignment:</div>
 
-    <div class="paragraph alignment-paragraph">{{race.getRaceInfo().alignment}}</div>
+      <div class="paragraph alignment-paragraph">{{race.getRaceInfo().alignment}}</div>
 
-    <div class="header size-header">Size:</div>
+      <div class="header size-header">Size:</div>
 
-    <div class="paragraph size-paragraph">{{race.getRaceInfo().size}}</div>
+      <div class="paragraph size-paragraph">{{race.getRaceInfo().size}}</div>
 
-    <div class="header speed-header">Speed:</div>
+      <div class="header speed-header">Speed:</div>
 
-    <div class="paragraph speed-paragraph">{{race.getRaceInfo().speed}}</div>
+      <div class="paragraph speed-paragraph">{{race.getRaceInfo().speed}}</div>
+    </div>
   </div>
 
 </div>

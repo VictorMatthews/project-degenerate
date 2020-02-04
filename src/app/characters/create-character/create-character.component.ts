@@ -72,5 +72,14 @@ export class CreateCharacterComponent implements OnInit {
   selectRace(race: Race) {
     this.selectedRace = race;
     this.subRaces = CharacterConstants.subRaces.getSubRaces(race);
+    this.selectedSubRace = null;
+  }
+
+  selectSubRace(subRace: SubRace) {
+    this.selectedSubRace = subRace;
+  }
+
+  selectClass(selectedClass: Class) {
+    this.selectedClass = selectedClass;
   }
 }

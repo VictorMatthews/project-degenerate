@@ -3,7 +3,7 @@
 </div>
 
 <div mat-dialog-content class="content">
-  <div *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.RACE">
+  <div class="grid" *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.RACE">
     <div class="left-side">
       <div *ngIf="races">
         <div class="pad-5">
@@ -16,12 +16,30 @@
     </div>
   </div>
 
-  <div *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.SUB_RACE">
-    Sub Race Works!
+  <div class="grid" *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.SUB_RACE">
+    <div class="left-side">
+      <div *ngIf="subRaces">
+        <div class="pad-5">
+          <app-race-card *ngFor="let subRace of subRaces" [race]="subRace" (click)="selectSubRace(subRace)"></app-race-card>
+        </div>
+      </div>
+    </div>
+    <div class="right-side">
+      <app-race-detail *ngIf="selectedSubRace" [race]="selectedSubRace"></app-race-detail>
+    </div>
   </div>
 
-  <div *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.CLASS">
-    Class Works!
+  <div class="grid" *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.CLASS">
+    <div class="left-side">
+      <div *ngIf="classes">
+        <div class="pad-5">
+          <app-class-card *ngFor="let class of classes" [class]="class" (click)="selectClass(class)"></app-class-card>
+        </div>
+      </div>
+    </div>
+    <div class="right-side">
+      <app-class-detail *ngIf="selectedClass" [class]="selectedClass"></app-class-detail>
+    </div>
   </div>
 
   <div *ngIf="choiceMap.get(currentChoice) === ui.CONSTANTS.BACKGROUND">
