@@ -2,40 +2,18 @@
   <div class="grid">
     <div class="title">{{class.classInfo.className}}</div>
 
-<!--    <div class="header ability-header">Ability Score Increase:</div>-->
-
-<!--    <div class="paragraph ability-paragraph">{{race.getRaceInfo().abilityScoreIncrease}}</div>-->
-
-<!--    <div *ngIf="race.hasSubRaces !== undefined">-->
-<!--      <div class="header age-header">Age:</div>-->
-
-<!--      <div class="paragraph age-paragraph">{{race.getRaceInfo().age}}</div>-->
-
-<!--      <div class="header alignment-header">Alignment:</div>-->
-
-<!--      <div class="paragraph alignment-paragraph">{{race.getRaceInfo().alignment}}</div>-->
-
-<!--      <div class="header size-header">Size:</div>-->
-
-<!--      <div class="paragraph size-paragraph">{{race.getRaceInfo().size}}</div>-->
-
-<!--      <div class="header speed-header">Speed:</div>-->
-
-<!--      <div class="paragraph speed-paragraph">{{race.getRaceInfo().speed}}</div>-->
-<!--    </div>-->
-
     <div class="header hit-point-header">Hit Points</div>
 
     <div class="paragraph hit-die">
-      <strong>Hit Dice: </strong>{{class.classInfo.hitDice}}
+      <strong>Hit Dice: </strong>{{getHitDice()}}
     </div>
 
     <div class="paragraph hit-point-level-one">
-      <strong>Hit Points at 1st Level: </strong>{{class.classInfo.hitPointLevelOne}}
+      <strong>Hit Points at 1st Level: </strong>{{getHitPointLevelOne()}}
     </div>
 
     <div class="paragraph hit-point-higher-level">
-      <strong>Hit Points at Higher Levels: </strong>{{class.classInfo.hitPointHigherLevel}}
+      <strong>Hit Points at Higher Levels: </strong>{{getHitPointHigherLevel()}}
     </div>
 
     <div class="header proficiencies-header">
@@ -59,7 +37,7 @@
     </div>
 
     <div class="paragraph skills">
-      <strong>Skills: </strong>{{class.classInfo.skills}}
+      <strong>Skills: </strong>{{class.classInfo.getSkills()}}
     </div>
   </div>
 

@@ -19,6 +19,12 @@ import { RaceDetailComponent } from './characters/race/race-detail/race-detail.c
 import { RaceCardComponent } from './characters/race/race-card/race-card.component';
 import { ClassCardComponent } from './characters/class/class-card/class-card.component';
 import { ClassDetailComponent } from './characters/class/class-detail/class-detail.component';
+import { SubRaceCardComponent } from "./characters/subRace/sub-race-card/sub-race-card.component";
+import { BackgroundCardComponent } from './characters/background/background-card/background-card.component';
+import { BackgroundDetailComponent } from './characters/background/background-detail/background-detail.component';
+import { AttributeSkillComponent } from './characters/attribute-skill/attribute-skill.component';
+import { AttributeAdjusterComponent } from './characters/attribute-skill/attribute-adjuster/attribute-adjuster.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -33,8 +39,13 @@ import { ClassDetailComponent } from './characters/class/class-detail/class-deta
     CreateCharacterComponent,
     RaceDetailComponent,
     RaceCardComponent,
+    SubRaceCardComponent,
     ClassCardComponent,
     ClassDetailComponent,
+    BackgroundCardComponent,
+    BackgroundDetailComponent,
+    AttributeSkillComponent,
+    AttributeAdjusterComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +53,7 @@ import { ClassDetailComponent } from './characters/class/class-detail/class-deta
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [
     DialogService,

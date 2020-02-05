@@ -1,0 +1,54 @@
+@import '../../../../assets/styles/variables';
+
+.grid {
+  padding-bottom: 10px;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto auto auto;
+  grid-template-areas:
+    'attribute attribute attribute'
+    'minus-area count-area plus-area';
+}
+
+.attribute {
+  grid-area: attribute;
+  text-align: center;
+  font-size: 125%;
+}
+
+.minus-area {
+  grid-area: minus-area;
+  text-align: center;
+  height: 44px;
+}
+
+.plus-area {
+  grid-area: plus-area;
+  text-align: center;
+  height: 44px;
+}
+
+.fa-plus-circle, .fa-minus-circle {
+  color: $shark;
+  font-size: 44px;
+}
+
+.count-area {
+  grid-area: count-area;
+  height: 44px;
+}
+input {
+  width: 100%;
+}
+
+.attribute-quantity {
+  text-align: center;
+  color: $blue;
+  font-size: $more-massive-font;
+  font-weight: bold;
+  height: inherit;
+  border: 0;
+  background-color: lightgray;
+  border-radius: 3px;
+  justify-content: center;
+}

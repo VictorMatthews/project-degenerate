@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CharactersStateService } from "./characters-state.service";
+import { CharactersStateService } from "./characters.state.service";
 import { Attribute, CharacterConstants, Skill } from "./characters.interfaces";
 
 @Injectable({

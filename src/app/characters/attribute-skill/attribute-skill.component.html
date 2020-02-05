@@ -1,0 +1,12 @@
+<div class="grid">
+  <div class="attribute-title">
+    <div>{{ui.ID.ATTRIBUTES.getString()}}</div>
+    <div>Points: {{state.attributePoints}}</div>
+  </div>
+  <div class="attributes">
+    <app-attribute-adjuster *ngFor="let attribute of state.attributes" [attribute]="attribute"></app-attribute-adjuster>
+  </div>
+  <div class="skills">
+
+  </div>
+</div>

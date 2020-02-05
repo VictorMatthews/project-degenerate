@@ -1,0 +1,24 @@
+.grid {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 33% 67%;
+  grid-template-areas:
+    'attribute-title skill-title'
+    'attributes skills';
+}
+
+.attribute-title {
+  grid-area: attribute-title;
+}
+
+.attribute {
+  grid-area: attribute;
+}
+
+.skill-title {
+  grid-area: skill-title;
+}
+
+.skills {
+  grid-area: skills;
+}

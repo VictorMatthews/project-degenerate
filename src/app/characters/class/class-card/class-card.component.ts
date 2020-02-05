@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Class} from "../../characters.interfaces";
+import {Class, Race} from "../../characters.interfaces";
+import {CreateCharacterStateService} from "../../create-character/create-character.state.service";
 
 @Component({
   selector: 'app-class-card',
@@ -10,9 +11,12 @@ export class ClassCardComponent implements OnInit {
 
   @Input() class: Class;
 
-  constructor() { }
+  constructor(public state: CreateCharacterStateService) { }
 
   ngOnInit() {
   }
 
+  isSelected() {
+    return this.class === this.state.selectedClass ? 'selected-card' : '';
+  }
 }

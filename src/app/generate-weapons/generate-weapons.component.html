@@ -1,14 +1,13 @@
-<!--<div class="background">-->
-<!--  <div class="scroll">-->
-<!--    <div class="list-grid">-->
-<!--      <div class="list-item" [class.list-item-mobile]="ui.isMobile()" *ngFor="let weapon of weapons">-->
-<!--        <app-weapon [weapon]="weapon"></app-weapon>-->
-<!--      </div>-->
-<!--    </div>-->
+<div class="background">
+  <div class="scroll">
+    <div class="list-grid">
+      <div class="list-item" [class.list-item-mobile]="ui.isMobile()" *ngFor="let weapon of weapons">
+        <app-weapon [weapon]="weapon"></app-weapon>
+      </div>
+    </div>
 
-<!--    <button mat-fab class="new-weapon-button" (click)="generateWeapon()">-->
-<!--      <i class="fas fa-plus"></i>-->
-<!--    </button>-->
-<!--  </div>-->
-<!--</div>-->
-<app-create-character></app-create-character>
+    <button mat-fab class="new-weapon-button" (click)="generateWeapon()">
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+</div>

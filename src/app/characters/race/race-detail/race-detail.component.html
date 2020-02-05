@@ -4,7 +4,7 @@
 
     <div class="header ability-header">Ability Score Increase:</div>
 
-    <div class="paragraph ability-paragraph">{{race.getRaceInfo().abilityScoreIncrease}}</div>
+    <div class="paragraph ability-paragraph">{{getAbilityScoreIncrease()}}</div>
 
     <div *ngIf="race.hasSubRaces !== undefined">
       <div class="header age-header">Age:</div>
@@ -21,7 +21,7 @@
 
       <div class="header speed-header">Speed:</div>
 
-      <div class="paragraph speed-paragraph">{{race.getRaceInfo().speed}}</div>
+      <div class="paragraph speed-paragraph">{{getSpeed()}}</div>
     </div>
   </div>
 
