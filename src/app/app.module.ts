@@ -25,6 +25,8 @@ import { BackgroundDetailComponent } from './characters/background/background-de
 import { AttributeSkillComponent } from './characters/attribute-skill/attribute-skill.component';
 import { AttributeAdjusterComponent } from './characters/attribute-skill/attribute-adjuster/attribute-adjuster.component';
 import {FormsModule} from "@angular/forms";
+import { SkillChoiceComponent } from './characters/attribute-skill/skill-choice/skill-choice.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -46,15 +48,16 @@ import {FormsModule} from "@angular/forms";
     BackgroundDetailComponent,
     AttributeSkillComponent,
     AttributeAdjusterComponent,
+    SkillChoiceComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    MaterialModule,
-    HttpClientModule,
-    FormsModule,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        MaterialModule,
+        HttpClientModule,
+        FormsModule,
+    ],
   providers: [
     DialogService,
   ],

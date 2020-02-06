@@ -1,0 +1,27 @@
+@import '../../../../assets/styles/variables';
+
+.grid {
+  padding-bottom: 5px;
+  display: grid;
+  grid-align-rows-directive: left;
+  grid-template-rows: auto;
+  grid-template-columns: auto auto;
+  grid-template-areas:
+    'skill-modifier skill-check';
+}
+
+.skills {
+  grid-area: skills;
+  font-family: Arial;
+  font-size: 20px;
+}
+
+.skill-modifier {
+  grid-area: skill-modifier;
+  text-align: right;
+  padding: 0px 10px 0px 10px;
+}
+
+.skill-check {
+  grid-area: skill-check;
+}

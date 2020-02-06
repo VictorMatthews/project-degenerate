@@ -1,14 +1,21 @@
 .grid {
   display: grid;
   grid-template-rows: auto auto;
-  grid-template-columns: 33% 67%;
+  grid-template-columns: 25% 25%;
   grid-template-areas:
     'attribute-title skill-title'
     'attributes skills';
 }
 
+.title {
+  font-size: 110%;
+  font-weight: bold;
+}
+
 .attribute-title {
   grid-area: attribute-title;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 .attribute {
@@ -17,6 +24,8 @@
 
 .skill-title {
   grid-area: skill-title;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 .skills {

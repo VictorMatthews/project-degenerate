@@ -12,29 +12,35 @@ export class AttributeAdjusterComponent implements OnInit {
 
   @Input() attribute: Attribute;
   attValue: number = 8;
-  incAttValue: number = 0;
 
   constructor(public ui: Ui, public state: CreateCharacterStateService) { }
 
   ngOnInit() {
+    if (this.state.attributeValueMap.has(this.attribute)) {
+      this.attValue = this.state.attributeValueMap.get(this.attribute);
+    } else {
+      this.setStateAttributeValue();
+    }
   }
 
   minus() {
     if (this.attValue > 8) {
-      let cost = this.getAttributeValue() >= 14 ? 2 : 1;
+      let cost = this.getCost(false);
       let points = this.state.attributePoints;
       this.attValue--;
       this.state.attributePoints = points + cost;
     }
+    this.setStateAttributeValue();
   }
 
   plus() {
-    let cost = this.getAttributeValue() >= 13 ? 2 : 1;
+    let cost = this.getCost(true);
     let points = this.state.attributePoints;
     if (this.state.attributePoints >= cost && this.attValue < 15) {
       this.attValue++;
       this.state.attributePoints = points - cost;
     }
+    this.setStateAttributeValue();
   }
 
   getAttributeValue() {
@@ -42,9 +48,13 @@ export class AttributeAdjusterComponent implements OnInit {
   }
 
   calcIncAttValue() {
+    if (this.state.attributeIncMap.has(this.attribute)) {
+      return this.state.attributeIncMap.get(this.attribute);
+    }
     let characterAttributes: CharacterAttribute[] = this.state.selectedRace.getIncreaseAttribute();
     for (let i = 0; i < characterAttributes.length; i++) {
       if (characterAttributes[i].attribute.getId() === this.attribute.getId()) {
+        this.state.attributeIncMap.set(this.attribute, characterAttributes[i].increaseValue);
         return characterAttributes[i].increaseValue;
       }
     }
@@ -52,17 +62,37 @@ export class AttributeAdjusterComponent implements OnInit {
       characterAttributes = this.state.selectedSubRace.getIncreaseAttribute();
       for (let i = 0; i < characterAttributes.length; i++) {
         if (characterAttributes[i].attribute.getId() === this.attribute.getId()) {
+          this.state.attributeIncMap.set(this.attribute, characterAttributes[i].increaseValue);
           return characterAttributes[i].increaseValue;
         }
       }
     }
+    this.state.attributeIncMap.set(this.attribute, 0);
     return 0;
   }
 
-  getCost() {
-    if (this.getAttributeValue() >= 14) {
+  getCost(isPlus: boolean) {
+    if ((isPlus && this.getAttributeValue() >= 13)
+      || (!isPlus && this.getAttributeValue() >= 14)) {
       return 2;
     }
     return 1;
+  }
+
+  disabled(isPlus: boolean) {
+    if (isPlus) {
+      if (this.state.attributePoints - this.getCost(isPlus) < 0 || this.attValue === 15) {
+        return 'disabled-button';
+      }
+    } else {
+      if (this.attValue === 8) {
+        return 'disabled-button';
+      }
+    }
+    return '';
+  }
+
+  private setStateAttributeValue(): void {
+    this.state.attributeValueMap.set(this.attribute, this.attValue);
   }
 }

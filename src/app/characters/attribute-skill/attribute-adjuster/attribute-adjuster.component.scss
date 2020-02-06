@@ -13,19 +13,22 @@
 .attribute {
   grid-area: attribute;
   text-align: center;
-  font-size: 125%;
+  font-size: 100%;
+  font-family: Cinzel Decorative;
 }
 
 .minus-area {
   grid-area: minus-area;
   text-align: center;
   height: 44px;
+  padding-right: 5px
 }
 
 .plus-area {
   grid-area: plus-area;
   text-align: center;
   height: 44px;
+  padding-left: 5px
 }
 
 .fa-plus-circle, .fa-minus-circle {
@@ -33,15 +36,13 @@
   font-size: 44px;
 }
 
-.count-area {
-  grid-area: count-area;
-  height: 44px;
-}
-input {
-  width: 100%;
+.disabled-button {
+  color: $light-gray;
 }
 
 .attribute-quantity {
+  grid-area: count-area;
+  height: 44px;
   text-align: center;
   color: $blue;
   font-size: $more-massive-font;
@@ -51,4 +52,5 @@ input {
   background-color: lightgray;
   border-radius: 3px;
   justify-content: center;
+  //width: 100px;
 }

@@ -8,7 +8,7 @@ import {
   Class,
   Flaw,
   Ideal, PersonalityTrait,
-  Race,
+  Race, Skill,
   SubRace
 } from "../characters.interfaces";
 import {Constant} from "../../shared/constants/constants";
@@ -38,7 +38,12 @@ export class CreateCharacterStateService {
   ideals: Ideal[];
   personalityTraits: PersonalityTrait[];
   attributes: Attribute[] = CharacterConstants.attributes.getAttributes();
+  skills: Skill[] = CharacterConstants.skills.getSkills();
   attributePoints: number = 27;
+  skillPoints: number;
+  attributeValueMap: Map<Attribute, number> = new Map;
+  attributeIncMap: Map<Attribute, number> = new Map;
+  selectedSkillsMap: Map<Skill, boolean> = new Map;
 
   constructor(public ui: Ui) { }
 
@@ -61,6 +66,10 @@ export class CreateCharacterStateService {
       this.setupChoiceMap();
     }
     this.attributePoints = 27;
+    this.skillPoints = 0;
+    this.attributeValueMap.clear();
+    this.attributeIncMap.clear();
+    this.selectedSkillsMap.clear();
   }
 
   setupChoiceMap() {
@@ -124,6 +133,7 @@ export class CreateCharacterStateService {
     this.selectedRace = race;
     this.subRaces = CharacterConstants.subRaces.getSubRaces(race);
     this.selectedSubRace = null;
+    this.attributeIncMap.clear();
     // this.newCharacter.race = race.raceName;
   }
 
@@ -134,6 +144,8 @@ export class CreateCharacterStateService {
 
   selectClass(selectedClass: Class) {
     this.selectedClass = selectedClass;
+    this.skillPoints = selectedClass.classInfo.profSkillsToChoose;
+    this.selectedSkillsMap.clear();
     // this.newCharacter.className = this.selectedClass.className;
   }
 
