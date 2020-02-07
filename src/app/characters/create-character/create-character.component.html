@@ -3,6 +3,7 @@
 </div>
 
 <div mat-dialog-content class="content">
+
   <div class="grid" *ngIf="state.getCurrentChoice() === ui.CONSTANTS.RACE">
     <div class="left-side">
       <div *ngIf="state.races">
@@ -11,6 +12,7 @@
         </div>
       </div>
     </div>
+    <mat-divider class="divider" [vertical]="true"></mat-divider>
     <div class="right-side">
       <app-race-detail *ngIf="state.selectedRace" [race]="state.selectedRace"></app-race-detail>
     </div>
@@ -24,6 +26,7 @@
         </div>
       </div>
     </div>
+    <mat-divider class="divider" [vertical]="true"></mat-divider>
     <div class="right-side">
       <app-race-detail *ngIf="state.selectedSubRace" [race]="state.selectedSubRace"></app-race-detail>
     </div>
@@ -37,6 +40,7 @@
         </div>
       </div>
     </div>
+    <mat-divider class="divider" [vertical]="true"></mat-divider>
     <div class="right-side">
       <app-class-detail *ngIf="state.selectedClass" [class]="state.selectedClass"></app-class-detail>
     </div>
@@ -50,12 +54,13 @@
         </div>
       </div>
     </div>
+    <mat-divider class="divider" [vertical]="true"></mat-divider>
     <div class="right-side">
       <app-background-detail *ngIf="state.selectedBackground" [background]="state.selectedBackground"></app-background-detail>
     </div>
   </div>
 
-  <div *ngIf="state.getCurrentChoice() === ui.CONSTANTS.ATTRIBUTES_SKILLS">
+  <div class="content" *ngIf="state.getCurrentChoice() === ui.CONSTANTS.ATTRIBUTES_SKILLS">
     <app-attribute-skill></app-attribute-skill>
   </div>
 </div>
@@ -64,5 +69,5 @@
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-button (click)="state.previous()" [disabled]="!state.canGoBack()">Previous</button>
   <button mat-button (click)="state.next()" [disabled]="!state.canGoForward()">Next</button>
-  <button mat-button [mat-dialog-close]="state.newCharacter" [disabled]="!state.readyToFinish()">Finish</button>
+  <button mat-button (click)="state.finish()" [mat-dialog-close]="state.newCharacter" [disabled]="!state.readyToFinish()">Finish</button>
 </mat-dialog-actions>

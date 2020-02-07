@@ -20,6 +20,7 @@ export class Constants {
   readonly WEAPONS = new Constant('Weapons', 'fa-gavel', 'fas');
   readonly CHARACTERS = new Constant('Characters', 'fa-dice-d20', 'fas');
 
+  readonly MY_CHARACTERS = new Constant('My Characters');
   readonly RACE = new Constant('Race');
   readonly SUB_RACE = new Constant('Sub-Race');
   readonly CLASS = new Constant('Class');

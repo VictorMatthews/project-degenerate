@@ -1,0 +1,10 @@
+<div mat-dialog-title>What's your characters name?</div>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Character Name</mat-label>
+    <input matInput [(ngModel)]="name" class="control" required>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [disabled]="!name" [mat-dialog-close]="name">Submit!</button>
+</mat-dialog-actions>

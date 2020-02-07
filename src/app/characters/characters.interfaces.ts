@@ -1,33 +1,107 @@
-export interface Character {
-  isCharacterComplete: boolean;
-  characterName: string;
-  background: string;
-  race: string;
-  subRace: string;
-  className: string;
-  alignment: string;
-  classLevel: string,
-  experience: string,
-
-  strength: number;
-  dexterity: number;
-  constitution: number;
-  intelligence: number;
-  wisdom: number;
-  charisma: number;
-
-  personalityTrait: string;
-  ideals: string;
-  bonds: string;
-  flaws: string;
-
-  profSkills: Attribute[];
-  increaseAttributes: CharacterAttribute[];
-}
+// export class Character {
+//   isCharacterComplete: boolean;
+//   characterName: string;
+//   background: string;
+//   race: string;
+//   subRace: string;
+//   className: string;
+//   alignment: string;
+//   classLevel: string;
+//   experience: string;
+//
+//   strength: number;
+//   dexterity: number;
+//   constitution: number;
+//   intelligence: number;
+//   wisdom: number;
+//   charisma: number;
+//
+//   personalityTrait: string;
+//   ideals: string;
+//   bonds: string;
+//   flaws: string;
+//
+//   profSkills: Skill[];
+//   increaseAttributes: CharacterAttribute[];
+//   constructor() {}
+// }
 
 export interface CharacterAttribute {
   attribute: Attribute;
   increaseValue: number;
+}
+
+export class Character {
+  private characterName: string;
+  private raceId: number;
+  private subRaceId: number;
+  private classId: number;
+  private alignmentId: number;
+  private backgroundId: number;
+
+  private strength: number;
+  private dexterity: number;
+  private constitution: number;
+  private intelligence: number;
+  private wisdom: number;
+  private charisma: number;
+
+  private personalityTraits: string;
+  private ideals: string;
+  private bonds: string;
+  private flaws: string;
+
+  profSkillIds: number[];
+
+  constructor(readonly race: Race, readonly subRace: SubRace, readonly charClass: Class, readonly alignment: Alignment,
+              readonly background: Background, readonly bond: string, readonly flaw: string, readonly ideal: string,
+              readonly personalityTrait: string, readonly attMap: Map<Attribute, number>, readonly skillMap: Map<Skill, boolean>) {
+    this.raceId = race.getRaceId();
+    this.subRaceId = 0;
+    if (race.getHasSubRaces()) {
+      this.subRaceId = subRace.getSubRaceId();
+    }
+    this.classId = charClass.getClassId();
+    this.alignmentId = alignment.alignmentId;
+    this.backgroundId = background.getBackgroundId();
+    this.bonds = bond;
+    this.flaws = flaw;
+    this.ideals = ideal;
+    this.personalityTraits = personalityTrait;
+    this.strength = attMap.get(CharacterConstants.attributes.STRENGTH);
+    this.dexterity = attMap.get(CharacterConstants.attributes.DEXTERITY);
+    this.constitution = attMap.get(CharacterConstants.attributes.CONSTITUTION);
+    this.intelligence = attMap.get(CharacterConstants.attributes.INTELLIGENCE);
+    this.wisdom = attMap.get(CharacterConstants.attributes.WISDOM);
+    this.charisma = attMap.get(CharacterConstants.attributes.CHARISMA);
+    for (let skill of skillMap.keys()) {
+      this.profSkillIds.push(skill.getId());
+    }
+  }
+
+  setCharacterName(name: string) {
+    this.characterName = name;
+  }
+
+  getRaceId() {
+    return this.raceId;
+  }
+
+  getSubRaceId() {
+    return this.subRaceId;
+  }
+
+  getClassId() {
+    return this.classId;
+  }
+
+  getAlignmentId() {
+    return this.alignmentId;
+  }
+
+  getBackgroundId() {
+    return this.backgroundId;
+  }
 }
 
 export class Attribute {
@@ -159,6 +233,18 @@ export class Races {
   readonly HALF_ORC = new Race(8, 'Half Orc', 30, [{attribute: CharacterConstants.attributes.STRENGTH, increaseValue: 2},{attribute: CharacterConstants.attributes.CONSTITUTION, increaseValue: 1}], CharacterConstants.raceInfos.HALF_ORC, false);
   readonly TIEFLING= new Race(9, 'Tiefling', 30, [{attribute: CharacterConstants.attributes.CHARISMA, increaseValue: 2},{attribute: CharacterConstants.attributes.INTELLIGENCE, increaseValue: 1}], CharacterConstants.raceInfos.TIEFLING, false);
 
+  readonly raceMap = new Map([
+    [ this.DWARF.getRaceId(), this.DWARF ],
+    [ this.ELF.getRaceId(), this.ELF ],
+    [ this.HALFLING.getRaceId(), this.HALFLING ],
+    [ this.HUMAN.getRaceId(), this.HUMAN ],
+    [ this.DRAGONBORN.getRaceId(), this.DRAGONBORN ],
+    [ this.GNOME.getRaceId(), this.GNOME ],
+    [ this.HALF_ELF.getRaceId(), this.HALF_ELF ],
+    [ this.HALF_ORC.getRaceId(), this.HALF_ORC ],
+    [ this.TIEFLING.getRaceId(), this.TIEFLING ],
+  ]);
+
   private populateHumanAttributes(): CharacterAttribute[] {
     let humanAttributes: CharacterAttribute[] = [];
     for (let attr of CharacterConstants.attributes.getAttributes().reverse()) {
@@ -170,10 +256,15 @@ export class Races {
   public getRaces(): Race[] {
     return [this.DWARF, this.ELF, this.HALFLING, this.HUMAN, this.DRAGONBORN, this.GNOME, this.HALF_ELF, this.HALF_ORC, this.TIEFLING];
   }
+
+  getRaceById(raceId: number): Race {
+    return this.raceMap.get(raceId);
+  }
 }
 
 export class SubRace {
-  constructor(readonly raceId?: number, readonly raceName?: string, readonly increaseAttribute?: CharacterAttribute[], readonly raceInfo?: RaceInfo) {
+  constructor(readonly subRaceId: number, readonly raceId?: number, readonly raceName?: string, readonly increaseAttribute?: CharacterAttribute[], readonly raceInfo?: RaceInfo) {
+    this.subRaceId = subRaceId;
     this.raceId = raceId;
     this.raceName = raceName;
     this.increaseAttribute = increaseAttribute;
@@ -182,6 +273,10 @@ export class SubRace {
 
   public getSubRaceName(): string {
     return this.raceName;
+  }
+
+  public getSubRaceId(): number {
+    return this.subRaceId;
   }
 
   public getRaceId(): number {
@@ -202,59 +297,99 @@ export class SubRace {
 }
 
 export class SubRaces {
-  readonly NO_SUBRACE = new SubRace(0);
-  readonly HILL_DWARF = new SubRace(CharacterConstants.races.DWARF.getRaceId(), 'Hill Dwarf', [{attribute: CharacterConstants.attributes.WISDOM, increaseValue: 1}], CharacterConstants.raceInfos.HILL_DWARF);
-  readonly MOUNTAIN_DWARF = new SubRace(CharacterConstants.races.DWARF.getRaceId(), 'Mountain Dwarf', [{attribute: CharacterConstants.attributes.STRENGTH, increaseValue: 2}], CharacterConstants.raceInfos.MOUNTAIN_DWARF);
-  readonly HIGH_ELF = new SubRace(CharacterConstants.races.ELF.getRaceId(), 'High Elf', [{attribute: CharacterConstants.attributes.INTELLIGENCE, increaseValue: 1}], CharacterConstants.raceInfos.HIGH_ELF);
-  readonly WOOD_ELF = new SubRace(CharacterConstants.races.ELF.getRaceId(), 'Wood Elf', [{attribute: CharacterConstants.attributes.WISDOM, increaseValue: 1}], CharacterConstants.raceInfos.WOOD_ELF);
-  readonly DARK_ELF = new SubRace(CharacterConstants.races.ELF.getRaceId(), 'Dark Elf (Drow)', [{attribute: CharacterConstants.attributes.CHARISMA, increaseValue: 1}], CharacterConstants.raceInfos.DARK_ELF);
-  readonly LIGHT_FOOT_HALFLING = new SubRace(CharacterConstants.races.HALFLING.getRaceId(), 'Lightfoot Halfling', [{attribute: CharacterConstants.attributes.CHARISMA, increaseValue: 1}], CharacterConstants.raceInfos.LIGHT_FOOT_HALFLING);
-  readonly STOUT_HALFLING = new SubRace(CharacterConstants.races.HALFLING.getRaceId(), 'Stout Halfling', [{attribute: CharacterConstants.attributes.CONSTITUTION, increaseValue: 1}], CharacterConstants.raceInfos.STOUT_HALFLING);
-  readonly ROCK_GNOME = new SubRace(CharacterConstants.races.GNOME.getRaceId(), 'Rock Gnome', [{attribute: CharacterConstants.attributes.CONSTITUTION, increaseValue: 1}], CharacterConstants.raceInfos.ROCK_GNOME);
-  readonly FOREST_GNOME = new SubRace(CharacterConstants.races.GNOME.getRaceId(), 'Forest Gnome', [{attribute: CharacterConstants.attributes.DEXTERITY, increaseValue: 1}], CharacterConstants.raceInfos.FOREST_GNOME);
+  readonly NO_SUBRACE = new SubRace(0, 0);
+  readonly HILL_DWARF = new SubRace(1, CharacterConstants.races.DWARF.getRaceId(), 'Hill Dwarf', [{attribute: CharacterConstants.attributes.WISDOM, increaseValue: 1}], CharacterConstants.raceInfos.HILL_DWARF);
+  readonly MOUNTAIN_DWARF = new SubRace(2, CharacterConstants.races.DWARF.getRaceId(), 'Mountain Dwarf', [{attribute: CharacterConstants.attributes.STRENGTH, increaseValue: 2}], CharacterConstants.raceInfos.MOUNTAIN_DWARF);
+  readonly HIGH_ELF = new SubRace(3, CharacterConstants.races.ELF.getRaceId(), 'High Elf', [{attribute: CharacterConstants.attributes.INTELLIGENCE, increaseValue: 1}], CharacterConstants.raceInfos.HIGH_ELF);
+  readonly WOOD_ELF = new SubRace(4, CharacterConstants.races.ELF.getRaceId(), 'Wood Elf', [{attribute: CharacterConstants.attributes.WISDOM, increaseValue: 1}], CharacterConstants.raceInfos.WOOD_ELF);
+  readonly DARK_ELF = new SubRace(5, CharacterConstants.races.ELF.getRaceId(), 'Dark Elf (Drow)', [{attribute: CharacterConstants.attributes.CHARISMA, increaseValue: 1}], CharacterConstants.raceInfos.DARK_ELF);
+  readonly LIGHT_FOOT_HALFLING = new SubRace(6, CharacterConstants.races.HALFLING.getRaceId(), 'Lightfoot Halfling', [{attribute: CharacterConstants.attributes.CHARISMA, increaseValue: 1}], CharacterConstants.raceInfos.LIGHT_FOOT_HALFLING);
+  readonly STOUT_HALFLING = new SubRace(7, CharacterConstants.races.HALFLING.getRaceId(), 'Stout Halfling', [{attribute: CharacterConstants.attributes.CONSTITUTION, increaseValue: 1}], CharacterConstants.raceInfos.STOUT_HALFLING);
+  readonly ROCK_GNOME = new SubRace(8, CharacterConstants.races.GNOME.getRaceId(), 'Rock Gnome', [{attribute: CharacterConstants.attributes.CONSTITUTION, increaseValue: 1}], CharacterConstants.raceInfos.ROCK_GNOME);
+  readonly FOREST_GNOME = new SubRace(9, CharacterConstants.races.GNOME.getRaceId(), 'Forest Gnome', [{attribute: CharacterConstants.attributes.DEXTERITY, increaseValue: 1}], CharacterConstants.raceInfos.FOREST_GNOME);
 
-  public getSubRaces(race?: Race): SubRace[] {
-    if (race) {
-      if (race === CharacterConstants.races.DWARF) {
-        return [this.HILL_DWARF, this.MOUNTAIN_DWARF];
-      } else if (race === CharacterConstants.races.ELF) {
-        return [this.HIGH_ELF, this.WOOD_ELF, this.DARK_ELF];
-      } else if (race === CharacterConstants.races.HALFLING) {
-        return [this.LIGHT_FOOT_HALFLING, this.STOUT_HALFLING];
-      } else if (race === CharacterConstants.races.GNOME) {
-        return [this.ROCK_GNOME, this.FOREST_GNOME];
-      }
+  readonly subRaceMap = new Map([
+    [ this.NO_SUBRACE.getSubRaceId(), this.NO_SUBRACE ],
+    [ this.HILL_DWARF.getSubRaceId(), this.HILL_DWARF ],
+    [ this.MOUNTAIN_DWARF.getSubRaceId(), this.MOUNTAIN_DWARF ],
+    [ this.HIGH_ELF.getSubRaceId(), this.HIGH_ELF ],
+    [ this.WOOD_ELF.getSubRaceId(), this.WOOD_ELF ],
+    [ this.DARK_ELF.getSubRaceId(), this.DARK_ELF ],
+    [ this.LIGHT_FOOT_HALFLING.getSubRaceId(), this.LIGHT_FOOT_HALFLING ],
+    [ this.STOUT_HALFLING.getSubRaceId(), this.STOUT_HALFLING ],
+    [ this.ROCK_GNOME.getSubRaceId(), this.ROCK_GNOME ],
+    [ this.FOREST_GNOME.getSubRaceId(), this.FOREST_GNOME ],
+  ]);
+
+  readonly subRacesMap = new Map([
+    [ CharacterConstants.races.DWARF.getRaceId(), [this.HILL_DWARF, this.MOUNTAIN_DWARF] ],
+    [ CharacterConstants.races.ELF.getRaceId(), [this.HIGH_ELF, this.WOOD_ELF, this.DARK_ELF] ],
+    [ CharacterConstants.races.HALFLING.getRaceId(), [this.LIGHT_FOOT_HALFLING, this.STOUT_HALFLING] ],
+    [ CharacterConstants.races.GNOME.getRaceId(), [this.ROCK_GNOME, this.FOREST_GNOME] ],
+  ]);
+
+  public getSubRaces(raceId?: number): SubRace[] {
+    if (raceId) {
+      return this.subRacesMap.get(raceId);
     }
     return [this.NO_SUBRACE, this.HILL_DWARF, this.MOUNTAIN_DWARF, this.HIGH_ELF, this.WOOD_ELF, this.DARK_ELF, this.LIGHT_FOOT_HALFLING, this.STOUT_HALFLING, this.ROCK_GNOME, this.FOREST_GNOME];
+  }
+
+  getSubRaceById(subRaceId: number) {
+    return this.subRaceMap.get(subRaceId);
   }
 }
 
 export class Class {
-  constructor(readonly className: string, readonly hitDie: number, readonly classInfo: ClassInfo, readonly savingThrows: Attribute[]) {
+  constructor(readonly classId: number, readonly className: string, readonly hitDie: number, readonly classInfo: ClassInfo, readonly savingThrows: Attribute[]) {
+    this.classId = classId;
     this.className = className;
     this.hitDie = hitDie;
     this.classInfo = classInfo;
     this.savingThrows = savingThrows;
   }
+
+  getClassId() {
+    return this.classId;
+  }
 }
 
 export class Classes {
-  readonly BARBARIAN = new Class('Barbarian', 12, CharacterConstants.classInfos.BARBARIAN, [CharacterConstants.attributes.STRENGTH, CharacterConstants.attributes.CONSTITUTION]);
-  readonly BARD = new Class('Bard', 12, CharacterConstants.classInfos.BARD,[CharacterConstants.attributes.DEXTERITY, CharacterConstants.attributes.CHARISMA]);
-  readonly CLERIC = new Class('Cleric', 12, CharacterConstants.classInfos.CLERIC,[CharacterConstants.attributes.WISDOM, CharacterConstants.attributes.CHARISMA]);
-  readonly DRUID = new Class('Druid', 12, CharacterConstants.classInfos.DRUID,[CharacterConstants.attributes.INTELLIGENCE, CharacterConstants.attributes.WISDOM]);
-  readonly FIGHTER = new Class('Fighter',12, CharacterConstants.classInfos.FIGHTER,[CharacterConstants.attributes.STRENGTH, CharacterConstants.attributes.CONSTITUTION]);
-  readonly MONK = new Class('Monk', 12, CharacterConstants.classInfos.MONK,[CharacterConstants.attributes.STRENGTH, CharacterConstants.attributes.DEXTERITY]);
-  readonly PALADIN = new Class('Paladin', 12, CharacterConstants.classInfos.PALADIN,[CharacterConstants.attributes.WISDOM, CharacterConstants.attributes.CHARISMA]);
-  readonly RANGER = new Class('Ranger', 12, CharacterConstants.classInfos.RANGER,[CharacterConstants.attributes.STRENGTH, CharacterConstants.attributes.DEXTERITY]);
-  readonly ROGUE = new Class('Rogue', 12, CharacterConstants.classInfos.ROGUE,[CharacterConstants.attributes.DEXTERITY, CharacterConstants.attributes.INTELLIGENCE]);
-  readonly SORCERER = new Class('Sorcerer', 12, CharacterConstants.classInfos.SORCERER,[CharacterConstants.attributes.CONSTITUTION, CharacterConstants.attributes.CHARISMA]);
-  readonly WARLOCK = new Class('Warlock', 12, CharacterConstants.classInfos.WARLOCK,[CharacterConstants.attributes.WISDOM, CharacterConstants.attributes.CHARISMA]);
-  readonly WIZARD = new Class('Wizard', 12, CharacterConstants.classInfos.WIZARD,[CharacterConstants.attributes.INTELLIGENCE, CharacterConstants.attributes.WISDOM]);
+  readonly BARBARIAN = new Class(1, 'Barbarian', 12, CharacterConstants.classInfos.BARBARIAN, [CharacterConstants.attributes.STRENGTH, CharacterConstants.attributes.CONSTITUTION]);
+  readonly BARD = new Class(2, 'Bard', 12, CharacterConstants.classInfos.BARD,[CharacterConstants.attributes.DEXTERITY, CharacterConstants.attributes.CHARISMA]);
+  readonly CLERIC = new Class(3, 'Cleric', 12, CharacterConstants.classInfos.CLERIC,[CharacterConstants.attributes.WISDOM, CharacterConstants.attributes.CHARISMA]);
+  readonly DRUID = new Class(4, 'Druid', 12, CharacterConstants.classInfos.DRUID,[CharacterConstants.attributes.INTELLIGENCE, CharacterConstants.attributes.WISDOM]);
+  readonly FIGHTER = new Class(5, 'Fighter',12, CharacterConstants.classInfos.FIGHTER,[CharacterConstants.attributes.STRENGTH, CharacterConstants.attributes.CONSTITUTION]);
+  readonly MONK = new Class(6, 'Monk', 12, CharacterConstants.classInfos.MONK,[CharacterConstants.attributes.STRENGTH, CharacterConstants.attributes.DEXTERITY]);
+  readonly PALADIN = new Class(7, 'Paladin', 12, CharacterConstants.classInfos.PALADIN,[CharacterConstants.attributes.WISDOM, CharacterConstants.attributes.CHARISMA]);
+  readonly RANGER = new Class(8, 'Ranger', 12, CharacterConstants.classInfos.RANGER,[CharacterConstants.attributes.STRENGTH, CharacterConstants.attributes.DEXTERITY]);
+  readonly ROGUE = new Class(9, 'Rogue', 12, CharacterConstants.classInfos.ROGUE,[CharacterConstants.attributes.DEXTERITY, CharacterConstants.attributes.INTELLIGENCE]);
+  readonly SORCERER = new Class(10, 'Sorcerer', 12, CharacterConstants.classInfos.SORCERER,[CharacterConstants.attributes.CONSTITUTION, CharacterConstants.attributes.CHARISMA]);
+  readonly WARLOCK = new Class(11, 'Warlock', 12, CharacterConstants.classInfos.WARLOCK,[CharacterConstants.attributes.WISDOM, CharacterConstants.attributes.CHARISMA]);
+  readonly WIZARD = new Class(12, 'Wizard', 12, CharacterConstants.classInfos.WIZARD,[CharacterConstants.attributes.INTELLIGENCE, CharacterConstants.attributes.WISDOM]);
+
+  readonly classMap = new Map([
+    [ this.BARBARIAN.getClassId(), this.BARBARIAN ],
+    [ this.BARD.getClassId(), this.BARD ],
+    [ this.CLERIC.getClassId(), this.CLERIC ],
+    [ this.DRUID.getClassId(), this.DRUID ],
+    [ this.FIGHTER.getClassId(), this.FIGHTER ],
+    [ this.MONK.getClassId(), this.MONK ],
+    [ this.PALADIN.getClassId(), this.PALADIN ],
+    [ this.RANGER.getClassId(), this.RANGER ],
+    [ this.ROGUE.getClassId(), this.ROGUE ],
+    [ this.SORCERER.getClassId(), this.SORCERER ],
+    [ this.WARLOCK.getClassId(), this.WARLOCK ],
+    [ this.WIZARD.getClassId(), this.WIZARD ],
+  ]);
 
   public getClasses(): Class[] {
     return [this.BARBARIAN, this.BARD, this.CLERIC, this.DRUID, this.FIGHTER, this.MONK,
       this.PALADIN, this.RANGER, this.ROGUE, this.SORCERER, this.WARLOCK, this.WIZARD];
+  }
+
+  getClassById(classId: number) {
+    return this.classMap.get(classId);
   }
 }
 
@@ -297,10 +432,29 @@ export class Backgrounds {
   readonly SOLDIER = new Background(12, 'Soldier', [CharacterConstants.skills.ATHLETICS,CharacterConstants.skills.INTIMIDATION]);
   readonly URCHIN = new Background(13, 'Urchin', [CharacterConstants.skills.SLEIGHT_OF_HAND,CharacterConstants.skills.STEALTH]);
 
+  readonly backgroundMap = new Map([
+    [ this.ACOLYTE.getBackgroundId(), this.ACOLYTE ],
+    [ this.CHARLATAN.getBackgroundId(), this.CHARLATAN ],
+    [ this.CRIMINAL.getBackgroundId(), this.CRIMINAL ],
+    [ this.ENTERTAINER.getBackgroundId(), this.ENTERTAINER ],
+    [ this.FOLK_HERO.getBackgroundId(), this.FOLK_HERO ],
+    [ this.GUILD_ARTISAN.getBackgroundId(), this.GUILD_ARTISAN ],
+    [ this.HERMIT.getBackgroundId(), this.HERMIT ],
+    [ this.NOBLE.getBackgroundId(), this.NOBLE ],
+    [ this.OUTLANDER.getBackgroundId(), this.OUTLANDER ],
+    [ this.SAGE.getBackgroundId(), this.SAGE ],
+    [ this.SAILOR.getBackgroundId(), this.SAILOR ],
+    [ this.SOLDIER.getBackgroundId(), this.SOLDIER ],
+    [ this.URCHIN.getBackgroundId(), this.URCHIN ],
+  ]);
 
   public getBackgrounds(): Background[] {
     return [this.ACOLYTE, this.CHARLATAN, this.CRIMINAL, this.ENTERTAINER, this.FOLK_HERO, this.GUILD_ARTISAN,
       this.HERMIT, this.NOBLE, this.OUTLANDER, this.SAGE, this.SAILOR, this.SOLDIER, this.URCHIN];
+  }
+
+  getBackgroundById(backgroundId: number) {
+    return this.backgroundMap.get(backgroundId);
   }
 }
 
@@ -925,7 +1079,53 @@ export class ClassInfos {
   readonly WIZARD = new ClassInfo('Wizard', 6, 'None', 'daggers, darts, slings, quarterstaffs, light crossbows', 'None', 2,[CharacterConstants.skills.ARCANA, CharacterConstants.skills.HISTORY, CharacterConstants.skills.INSIGHT,CharacterConstants.skills.INVESTIGATION, CharacterConstants.skills.MEDICINE, CharacterConstants.skills.RELIGION]);
 }
 
+export class Alignment {
+  constructor(readonly alignmentId: number, readonly alignmentName: string) {
+    this.alignmentId = alignmentId;
+    this.alignmentName = alignmentName;
+  }
+
+  getAlignmentId() {
+    return this.alignmentId;
+  }
+}
+
+export class Alignments {
+  readonly LAWFUL_GOOD = new Alignment(0, 'Lawful Good');
+  readonly NEUTRAL_GOOD = new Alignment(1, 'Neutral Good');
+  readonly CHAOTIC_GOOD = new Alignment(2, 'Chaotic Good');
+  readonly LAWFUL_NEUTRAL = new Alignment(3, 'Lawful Neutral');
+  readonly TRUE_NEUTRAL = new Alignment(4, 'True Neutral');
+  readonly CHAOTIC_NEUTRAL = new Alignment(5, 'Chaotic Neutral');
+  readonly LAWFUL_EVIL = new Alignment(6, 'Lawful Evil');
+  readonly NEUTRAL_EVIL = new Alignment(7, 'Neutral Evil');
+  readonly CHAOTIC_EVIL = new Alignment(8, 'Chaotic Evil');
+
+  readonly alignmentMap = new Map([
+    [ this.LAWFUL_GOOD.getAlignmentId(), this.LAWFUL_GOOD ],
+    [ this.NEUTRAL_GOOD.getAlignmentId(), this.NEUTRAL_GOOD ],
+    [ this.CHAOTIC_GOOD.getAlignmentId(), this.CHAOTIC_GOOD ],
+    [ this.LAWFUL_NEUTRAL.getAlignmentId(), this.LAWFUL_NEUTRAL ],
+    [ this.TRUE_NEUTRAL.getAlignmentId(), this.TRUE_NEUTRAL ],
+    [ this.CHAOTIC_NEUTRAL.getAlignmentId(), this.CHAOTIC_NEUTRAL ],
+    [ this.LAWFUL_EVIL.getAlignmentId(), this.LAWFUL_EVIL ],
+    [ this.NEUTRAL_EVIL.getAlignmentId(), this.NEUTRAL_EVIL ],
+    [ this.CHAOTIC_EVIL.getAlignmentId(), this.CHAOTIC_EVIL ],
+  ]);
+
+  public getAlignments(): Alignment[] {
+    return [this.LAWFUL_GOOD, this.NEUTRAL_GOOD, this.CHAOTIC_GOOD,
+            this.LAWFUL_NEUTRAL, this.TRUE_NEUTRAL, this.CHAOTIC_NEUTRAL,
+            this.LAWFUL_EVIL, this.NEUTRAL_EVIL, this.CHAOTIC_EVIL];
+  }
+
+  getAlignmentById(alignmentId: number) {
+    return this.alignmentMap.get(alignmentId);
+  }
+}
+
 export class CharacterConstants {
+  public static alignments = new Alignments();
   public static attributes = new Attributes();
   public static raceInfos = new RaceInfos();
   public static races = new Races();

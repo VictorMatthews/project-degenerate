@@ -27,6 +27,7 @@ export class SkillChoiceComponent implements OnInit {
       if (s.getId() === this.skill.getId()) {
         this.isChecked = true;
         this.checkedByDefault = true;
+        this.state.selectedSkillsMap.set(s, true);
       }
     }
   }
@@ -48,8 +49,10 @@ export class SkillChoiceComponent implements OnInit {
     if (!this.disabled()) {
       if (this.isChecked) {
         this.state.skillPoints++;
+        this.state.selectedSkillsMap.delete(this.skill);
       } else {
         this.state.skillPoints--;
+        this.state.selectedSkillsMap.set(this.skill, true);
       }
       this.isChecked = !this.isChecked;
     }
@@ -60,5 +63,13 @@ export class SkillChoiceComponent implements OnInit {
     let incValue = this.state.attributeIncMap.get(this.skill.attributeMod);
     let skillMod = this.skillsService.getAttributeIncease(attValue + incValue);
     return this.isChecked ? skillMod + 2 : skillMod;
+  }
+
+  private checked(): boolean {
+    let selected = this.state.selectedSkillsMap.get(this.skill);
+    if (!this.ui.isNullOrUndefined(selected)) {
+      this.isChecked = selected;
+    }
+    return this.isChecked;
   }
 }

@@ -27,6 +27,8 @@ import { AttributeAdjusterComponent } from './characters/attribute-skill/attribu
 import {FormsModule} from "@angular/forms";
 import { SkillChoiceComponent } from './characters/attribute-skill/skill-choice/skill-choice.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { CharacterCardComponent } from './characters/character-card/character-card.component';
+import { CharacterNameDialogComponent } from './characters/create-character/character-name-dialog/character-name-dialog.component';
 
 
 @NgModule({
@@ -49,6 +51,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     AttributeSkillComponent,
     AttributeAdjusterComponent,
     SkillChoiceComponent,
+    CharacterCardComponent,
+    CharacterNameDialogComponent,
   ],
     imports: [
         BrowserModule,
@@ -63,6 +67,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
   ],
   entryComponents: [
     CreateCharacterComponent,
+    CharacterNameDialogComponent,
   ],
   bootstrap: [AppComponent]
 })

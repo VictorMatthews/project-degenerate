@@ -1,14 +1,15 @@
 <div class="characters">
   <div class="character-list">
-    <p>characters works!</p>
+    <div class="character-title">{{ui.CONSTANTS.MY_CHARACTERS.getString()}}</div>
+    <mat-divider></mat-divider>
+    <app-character-card *ngFor="let character of state.createdCharacters" [character]="character" (click)="state.selectCharacter(character)"></app-character-card>
   </div>
+  <mat-divider class="divider" [vertical]="true"></mat-divider>
   <div class="character-display">
-    <app-character [character]="state.selectedCharacter"></app-character>
+    <app-character *ngIf="state.selectedCharacter" [character]="state.selectedCharacter"></app-character>
   </div>
-
-  <button mat-fab class="new-character-button" (click)="state.createCharacter()">
-    <i class="fas fa-plus"></i>
-  </button>
 </div>
 
-<!--<app-create-character *ngIf="state.isCreatingCharacter"></app-create-character>-->
+<button mat-fab class="new-character-button" (click)="state.createCharacter()">
+  <i class="fas fa-plus"></i>
+</button>

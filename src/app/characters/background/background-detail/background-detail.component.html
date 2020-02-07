@@ -1,29 +1,36 @@
 <form class="background-details">
   <div>
-    <mat-form-field class="dropdown">
-      <mat-select placeholder="{{ui.ID.CHOOSE_BOND.getString()}}" name="chooseBond">
-        <mat-option *ngFor="let bond of state.bonds" [value]="bond.bond" (click)="state.selectBond(bond)">{{ bond.bond }}</mat-option>
+    <mat-form-field class="dropdown alignment">
+      <mat-select placeholder="{{ui.ID.CHOOSE_ALIGNMENT.getString()}}" name="chooseAlignment" [(value)]="state.selectedAlignment">
+        <mat-option *ngFor="let alignment of state.alignments" [value]="alignment" (click)="state.selectAlignment(alignment)">{{ alignment.alignmentName }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="dropdown">
-      <mat-select placeholder="{{ui.ID.CHOOSE_FLAW.getString()}}" name="chooseFlaw">
-        <mat-option *ngFor="let flaw of state.flaws" [value]="flaw.flaw" (click)="state.selectFlaw(flaw)">{{ flaw.flaw }}</mat-option>
+      <mat-select placeholder="{{ui.ID.CHOOSE_BOND.getString()}}" name="chooseBond" [(value)]="state.selectedBond">
+        <mat-option *ngFor="let bond of state.bonds" [value]="bond" (click)="state.selectBond(bond)">{{ bond.bond }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="dropdown">
-      <mat-select placeholder="{{ui.ID.CHOOSE_IDEAL.getString()}}" name="chooseBond">
-        <mat-option *ngFor="let ideal of state.ideals" [value]="ideal.ideal" (click)="state.selectIdeal(ideal)">{{ ideal.ideal }}</mat-option>
+      <mat-select placeholder="{{ui.ID.CHOOSE_FLAW.getString()}}" name="chooseFlaw" [(value)]="state.selectedFlaw">
+        <mat-option *ngFor="let flaw of state.flaws" [value]="flaw" (click)="state.selectFlaw(flaw)">{{ flaw.flaw }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field class="dropdown">
-      <mat-select placeholder="{{ui.ID.CHOOSE_PERSONALITY_TRAIT.getString()}}" name="chooseBond">
-        <mat-option *ngFor="let personalityTrait of state.personalityTraits" [value]="personalityTrait.personalityTrait" (click)="state.selectPersonalityTrait(personalityTrait)">{{ personalityTrait.personalityTrait }}</mat-option>
+      <mat-select placeholder="{{ui.ID.CHOOSE_IDEAL.getString()}}" name="chooseIdeal" [(value)]="state.selectedIdeal">
+        <mat-option *ngFor="let ideal of state.ideals" [value]="ideal" (click)="state.selectIdeal(ideal)">{{ ideal.ideal }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="dropdown">
+      <mat-select placeholder="{{ui.ID.CHOOSE_PERSONALITY_TRAIT.getString()}}" name="choosePersonalityTrait" [(value)]="state.selectedPersonalityTrait">
+        <mat-option *ngFor="let personalityTrait of state.personalityTraits" [value]="personalityTrait" (click)="state.selectPersonalityTrait(personalityTrait)">{{ personalityTrait.personalityTrait }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

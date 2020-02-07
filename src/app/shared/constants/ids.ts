@@ -18,6 +18,7 @@ export class Ids {
   readonly ATTRIBUTES = new Id('ATTRIBUTES', 'ATTRIBUTES');
   readonly SKILLS = new Id('SKILLS', 'SKILLS');
 
+  readonly CHOOSE_ALIGNMENT = new Id('Choose Alignment', 'Choose Alignment');
   readonly CHOOSE_BOND = new Id('Choose Bond', 'Choose Bond');
   readonly CHOOSE_FLAW = new Id('Choose Flaw', 'Choose Flaw');
   readonly CHOOSE_IDEAL = new Id('Choose Ideal', 'Choose Ideal');
