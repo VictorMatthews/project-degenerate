@@ -32,76 +32,164 @@ export interface CharacterAttribute {
 }
 
 export class Character {
-  private characterName: string;
-  private raceId: number;
-  private subRaceId: number;
-  private classId: number;
-  private alignmentId: number;
-  private backgroundId: number;
+  characterName: string;
+  raceId: number;
+  subRaceId: number = 0;
+  classId: number;
+  alignmentId: number;
+  backgroundId: number;
 
-  private strength: number;
-  private dexterity: number;
-  private constitution: number;
-  private intelligence: number;
-  private wisdom: number;
-  private charisma: number;
+  strength: number;
+  dexterity: number;
+  constitution: number;
+  intelligence: number;
+  wisdom: number;
+  charisma: number;
 
-  private personalityTraits: string;
-  private ideals: string;
-  private bonds: string;
-  private flaws: string;
+  personalityTraits: string;
+  ideals: string;
+  bonds: string;
+  flaws: string;
 
-  profSkillIds: number[];
+  profSkillIds: number[] = [];
 
-  constructor(readonly race: Race, readonly subRace: SubRace, readonly charClass: Class, readonly alignment: Alignment,
-              readonly background: Background, readonly bond: string, readonly flaw: string, readonly ideal: string,
-              readonly personalityTrait: string, readonly attMap: Map<Attribute, number>, readonly skillMap: Map<Skill, boolean>) {
-    this.raceId = race.getRaceId();
-    this.subRaceId = 0;
-    if (race.getHasSubRaces()) {
-      this.subRaceId = subRace.getSubRaceId();
-    }
-    this.classId = charClass.getClassId();
-    this.alignmentId = alignment.alignmentId;
-    this.backgroundId = background.getBackgroundId();
-    this.bonds = bond;
-    this.flaws = flaw;
-    this.ideals = ideal;
-    this.personalityTraits = personalityTrait;
-    this.strength = attMap.get(CharacterConstants.attributes.STRENGTH);
-    this.dexterity = attMap.get(CharacterConstants.attributes.DEXTERITY);
-    this.constitution = attMap.get(CharacterConstants.attributes.CONSTITUTION);
-    this.intelligence = attMap.get(CharacterConstants.attributes.INTELLIGENCE);
-    this.wisdom = attMap.get(CharacterConstants.attributes.WISDOM);
-    this.charisma = attMap.get(CharacterConstants.attributes.CHARISMA);
-    for (let skill of skillMap.keys()) {
-      this.profSkillIds.push(skill.getId());
-    }
-  }
+  constructor() {}
 
-  setCharacterName(name: string) {
-    this.characterName = name;
-  }
-
-  getRaceId() {
-    return this.raceId;
-  }
-
-  getSubRaceId() {
-    return this.subRaceId;
-  }
-
-  getClassId() {
-    return this.classId;
-  }
-
-  getAlignmentId() {
-    return this.alignmentId;
-  }
-
-  getBackgroundId() {
-    return this.backgroundId;
-  }
+  // setCharacterName(name: string) {
+  //   this.characterName = name;
+  // }
+  //
+  // setRaceId(raceId: number) {
+  //   this.raceId = raceId;
+  // }
+  //
+  // setSubRaceId(subRaceId: number) {
+  //   this.subRaceId = subRaceId;
+  // }
+  //
+  // setClassId(classId: number) {
+  //   this.classId = classId;
+  // }
+  //
+  // setAlignmentId(alignmentId: number) {
+  //   this.alignmentId = alignmentId;
+  // }
+  //
+  // setBackgroundId(backgroundId: number) {
+  //   this.backgroundId = backgroundId;
+  // }
+  //
+  // setPersonalityTrait(personalityTraits: string) {
+  //   this.personalityTraits = personalityTraits;
+  // }
+  //
+  // setIdeals(ideals: string) {
+  //   this.ideals = ideals;
+  // }
+  //
+  // setBonds(bonds: string) {
+  //   this.bonds = bonds;
+  // }
+  //
+  // setFlaws(flaws: string) {
+  //   this.flaws = flaws;
+  // }
+  //
+  // setStrength(strength: number) {
+  //   this.strength = strength;
+  // }
+  //
+  // setDexterity(dexterity: number) {
+  //   this.dexterity = dexterity;
+  // }
+  //
+  // setConstitution(constitution: number) {
+  //   this.constitution = constitution;
+  // }
+  //
+  // setIntelligence(intelligence: number) {
+  //   this.intelligence = intelligence;
+  // }
+  //
+  // setWisdom(wisdom: number) {
+  //   this.wisdom = wisdom;
+  // }
+  //
+  // setCharisma(charisma: number) {
+  //   this.charisma = charisma;
+  // }
+  //
+  // setProfSkillIds(profSkillIds: number[]) {
+  //   this.profSkillIds = profSkillIds;
+  // }
+  //
+  // getCharacterName() {
+  //   return this.characterName;
+  // }
+  //
+  // getRaceId() {
+  //   return this.raceId;
+  // }
+  //
+  // getSubRaceId() {
+  //   return this.subRaceId;
+  // }
+  //
+  // getClassId() {
+  //   return this.classId;
+  // }
+  //
+  // getAlignmentId() {
+  //   return this.alignmentId;
+  // }
+  //
+  // getBackgroundId() {
+  //   return this.backgroundId;
+  // }
+  //
+  // getPersonalityTrait() {
+  //   return this.personalityTraits;
+  // }
+  //
+  // getIdeals() {
+  //   return this.ideals;
+  // }
+  //
+  // getBonds() {
+  //   return this.bonds;
+  // }
+  //
+  // getFlaws() {
+  //   return this.flaws;
+  // }
+  //
+  // getStrength() {
+  //   return this.strength;
+  // }
+  //
+  // getDexterity() {
+  //   return this.dexterity;
+  // }
+  //
+  // getConstitution() {
+  //   return this.constitution;
+  // }
+  //
+  // getIntelligence() {
+  //   return this.intelligence;
+  // }
+  //
+  // getWisdom() {
+  //   return this.wisdom;
+  // }
+  //
+  // getCharisma() {
+  //   return this.charisma;
+  // }
+  //
+  // getProfSkillIds() {
+  //   return this.profSkillIds;
+  // }
 }
 
 export class Attribute {
@@ -480,7 +568,7 @@ export class Bonds {
   readonly CHARLATAN_5			= new Bond(CharacterConstants.backgrounds.CHARLATAN.getBackgroundId(), 	'A powerful person killed someone I love. Some day soon, I’ll have my revenge.');
   readonly CHARLATAN_6			= new Bond(CharacterConstants.backgrounds.CHARLATAN.getBackgroundId(), 	'I swindled and ruined a person who didn’t deserve it. I seek to atone for my misdeeds but might never be able to forgive myself.');
 
-  readonly CRIMINAL_1 			= new Bond(CharacterConstants.backgrounds.CRIMINAL.getBackgroundId(), 	'I\'m trying to pay off an old debt I owe to a generous benefactor.');
+  readonly CRIMINAL_1 		= new Bond(CharacterConstants.backgrounds.CRIMINAL.getBackgroundId(), 	'I\'m trying to pay off an old debt I owe to a generous benefactor.');
   readonly CRIMINAL_2			= new Bond(CharacterConstants.backgrounds.CRIMINAL.getBackgroundId(), 	'My ill-gotten gains go to support my family.');
   readonly CRIMINAL_3			= new Bond(CharacterConstants.backgrounds.CRIMINAL.getBackgroundId(), 	'Something important was taken from me, and I aim to steal it back.');
   readonly CRIMINAL_4			= new Bond(CharacterConstants.backgrounds.CRIMINAL.getBackgroundId(), 	'I will become the greatest thief that ever lived.');

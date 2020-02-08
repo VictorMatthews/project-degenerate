@@ -33,6 +33,25 @@
 .skill {
   padding-bottom: 10px;
   padding-left: 40px;
+  padding-top: 5px;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 10% auto;
+  grid-template-areas:
+    'skill-modifier skill-check';
+ }
+
+.skill-modifier {
+  grid-area: skill-modifier;
+  text-align: right;
+  margin-right: 10px;
+  margin-top: 3px;
+  border-bottom: 1px solid $medium-gray;
+}
+
+.skill-check {
+  grid-area: skill-check;
+  align: left;
 }
 
 .attributes {

@@ -1,11 +1,10 @@
 @import '../../../../assets/styles/variables';
 
 .grid {
-  padding-bottom: 5px;
+  padding-top: 5px;
   display: grid;
-  grid-align-rows-directive: left;
   grid-template-rows: auto;
-  grid-template-columns: auto auto;
+  grid-template-columns: 10% auto;
   grid-template-areas:
     'skill-modifier skill-check';
 }
@@ -19,9 +18,12 @@
 .skill-modifier {
   grid-area: skill-modifier;
   text-align: right;
-  padding: 0px 10px 0px 10px;
+  margin-right: 10px;
+  margin-top: 3px;
+  border-bottom: 1px solid $medium-gray;
 }
 
 .skill-check {
   grid-area: skill-check;
+  align: left;
 }

@@ -72,8 +72,8 @@ export class AttributeAdjusterComponent implements OnInit {
   }
 
   getCost(isPlus: boolean) {
-    if ((isPlus && this.getAttributeValue() >= 13)
-      || (!isPlus && this.getAttributeValue() >= 14)) {
+    if ((isPlus && this.attValue >= 13)
+      || (!isPlus && this.attValue >= 14)) {
       return 2;
     }
     return 1;

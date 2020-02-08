@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Attribute, CharacterAttribute, Race} from "../../characters/characters.interfaces";
 
 @Injectable({
   providedIn: 'root'

@@ -14,6 +14,7 @@ import {
 } from "../characters.interfaces";
 import {Constant} from "../../shared/constants/constants";
 import {Ui} from "../../shared/services/ui.service";
+import {EventHub} from "../../shared/services/EventHub";
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,7 @@ export class CreateCharacterStateService {
   ideals: Ideal[];
   personalityTraits: PersonalityTrait[];
 
-  constructor(public ui: Ui) { }
+  constructor(public ui: Ui, private eventHub: EventHub) { }
 
   clearData() {
     this.newCharacter = null;
@@ -61,6 +62,7 @@ export class CreateCharacterStateService {
     this.selectedSubRace = null;
     this.selectedClass = null;
     this.selectedBackground = null;
+    this.selectedAlignment = null;
     this.selectedBond = null;
     this.selectedFlaw = null;
     this.selectedIdeal = null;
@@ -222,32 +224,52 @@ export class CreateCharacterStateService {
     this.selectedAlignment = alignment;
   }
 
-  finish() {
-    // this.newCharacter.background = this.selectedBackground.backgroundName;
-    // this.newCharacter.race = this.selectedRace.raceName;
-    // if (this.selectedRace.hasSubRaces) {
-    //   this.newCharacter.subRace = this.selectedSubRace.raceName;
+  public finish(): void {
+    this.newCharacter = new Character();
+    // this.newCharacter.setRaceId(this.selectedRace.getRaceId());
+    // if (this.selectedRace.getHasSubRaces()) {
+    //   this.newCharacter.setSubRaceId(this.selectedSubRace.getSubRaceId());
     // }
-    // this.newCharacter.className = this.selectedClass.className;
-    // this.newCharacter.alignment = this.selectedAlignment.alignmentName;
-    // this.newCharacter.classLevel = '1';
-    // this.newCharacter.experience = '0';
-    // this.newCharacter.strength = this.attributeValueMap.get(CharacterConstants.attributes.STRENGTH);
-    // this.newCharacter.dexterity = this.attributeValueMap.get(CharacterConstants.attributes.DEXTERITY);;
-    // this.newCharacter.constitution = this.attributeValueMap.get(CharacterConstants.attributes.CONSTITUTION);;
-    // this.newCharacter.intelligence = this.attributeValueMap.get(CharacterConstants.attributes.INTELLIGENCE);;
-    // this.newCharacter.wisdom = this.attributeValueMap.get(CharacterConstants.attributes.WISDOM);;
-    // this.newCharacter.charisma = this.attributeValueMap.get(CharacterConstants.attributes.CHARISMA);;
-    // this.newCharacter.personalityTrait = this.selectedPersonalityTrait.personalityTrait;
-    // this.newCharacter.ideals = this.selectedIdeal.ideal;
-    // this.newCharacter.bonds = this.selectedBond.bond;
-    // this.newCharacter.flaws = this.selectedFlaw.flaw;
-    // this.newCharacter.profSkills = [];
-    // this.newCharacter.increaseAttributes = [];
-    // this.newCharacter.isCharacterComplete = true;
-
-    this.newCharacter = new Character(this.selectedRace, this.selectedSubRace, this.selectedClass, this.selectedAlignment,
-      this.selectedBackground, this.selectedBond.bond, this.selectedFlaw.flaw, this.selectedIdeal.ideal,
-      this.selectedPersonalityTrait.personalityTrait, this.attributeValueMap, this.selectedSkillsMap);
+    // this.newCharacter.setClassId(this.selectedClass.getClassId());
+    // this.newCharacter.setAlignmentId(this.selectedAlignment.getAlignmentId());
+    // this.newCharacter.setBackgroundId(this.selectedBackground.getBackgroundId());
+    // this.newCharacter.setBonds(this.selectedBond.bond);
+    // this.newCharacter.setFlaws(this.selectedFlaw.flaw);
+    // this.newCharacter.setIdeals(this.selectedIdeal.ideal);
+    // this.newCharacter.setPersonalityTrait(this.selectedPersonalityTrait.personalityTrait);
+    // this.newCharacter.setStrength(this.attributeValueMap.get(CharacterConstants.attributes.STRENGTH));
+    // this.newCharacter.setDexterity(this.attributeValueMap.get(CharacterConstants.attributes.DEXTERITY));
+    // this.newCharacter.setConstitution(this.attributeValueMap.get(CharacterConstants.attributes.CONSTITUTION));
+    // this.newCharacter.setIntelligence(this.attributeValueMap.get(CharacterConstants.attributes.INTELLIGENCE));
+    // this.newCharacter.setWisdom(this.attributeValueMap.get(CharacterConstants.attributes.WISDOM));
+    // this.newCharacter.setCharisma(this.attributeValueMap.get(CharacterConstants.attributes.CHARISMA));
+    // let profSkillIds: number[] = [];
+    // for (let skill of this.selectedSkillsMap.keys()) {
+    //   profSkillIds.push(skill.getId());
+    // }
+    // this.newCharacter.setProfSkillIds(profSkillIds);
+    this.newCharacter.raceId = (this.selectedRace.getRaceId());
+    if (this.selectedRace.getHasSubRaces()) {
+      this.newCharacter.subRaceId = (this.selectedSubRace.getSubRaceId());
+    }
+    this.newCharacter.classId = (this.selectedClass.getClassId());
+    this.newCharacter.alignmentId = (this.selectedAlignment.getAlignmentId());
+    this.newCharacter.backgroundId = (this.selectedBackground.getBackgroundId());
+    this.newCharacter.bonds = (this.selectedBond.bond);
+    this.newCharacter.flaws = (this.selectedFlaw.flaw);
+    this.newCharacter.ideals = (this.selectedIdeal.ideal);
+    this.newCharacter.personalityTraits = (this.selectedPersonalityTrait.personalityTrait);
+    this.newCharacter.strength = (this.attributeValueMap.get(CharacterConstants.attributes.STRENGTH));
+    this.newCharacter.dexterity = (this.attributeValueMap.get(CharacterConstants.attributes.DEXTERITY));
+    this.newCharacter.constitution = (this.attributeValueMap.get(CharacterConstants.attributes.CONSTITUTION));
+    this.newCharacter.intelligence = (this.attributeValueMap.get(CharacterConstants.attributes.INTELLIGENCE));
+    this.newCharacter.wisdom = (this.attributeValueMap.get(CharacterConstants.attributes.WISDOM));
+    this.newCharacter.charisma = (this.attributeValueMap.get(CharacterConstants.attributes.CHARISMA));
+    let profSkillIds: number[] = [];
+    for (let skill of this.selectedSkillsMap.keys()) {
+      profSkillIds.push(skill.getId());
+    }
+    this.newCharacter.profSkillIds = (profSkillIds);
+    this.eventHub.broadcastNewEvent(EventHub.FINISH_NEW_CHARACTER, this.newCharacter);
   }
 }

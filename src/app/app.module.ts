@@ -29,6 +29,7 @@ import { SkillChoiceComponent } from './characters/attribute-skill/skill-choice/
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { CharacterCardComponent } from './characters/character-card/character-card.component';
 import { CharacterNameDialogComponent } from './characters/create-character/character-name-dialog/character-name-dialog.component';
+import {EventHub, EventHubEvent} from "./shared/services/EventHub";
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { CharacterNameDialogComponent } from './characters/create-character/char
     ],
   providers: [
     DialogService,
+    EventHub,
   ],
   entryComponents: [
     CreateCharacterComponent,

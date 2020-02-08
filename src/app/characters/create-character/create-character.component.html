@@ -69,5 +69,5 @@
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-button (click)="state.previous()" [disabled]="!state.canGoBack()">Previous</button>
   <button mat-button (click)="state.next()" [disabled]="!state.canGoForward()">Next</button>
-  <button mat-button (click)="state.finish()" [mat-dialog-close]="state.newCharacter" [disabled]="!state.readyToFinish()">Finish</button>
+  <button mat-button (click)="state.finish()" mat-dialog-close [disabled]="!state.readyToFinish()">Finish</button>
 </mat-dialog-actions>
