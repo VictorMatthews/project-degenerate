@@ -33,7 +33,8 @@
     "rxjs-compat": "6.3.3",
     "smoothscroll-polyfill": "^0.4.4",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "serialize-javascript": ">=2.1.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.10",
