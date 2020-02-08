@@ -1,0 +1,56 @@
+@import '../../../../assets/styles/variables';
+
+.grid {
+  padding-bottom: 10px;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto auto auto;
+  grid-template-areas:
+    'attribute attribute attribute'
+    'minus-area count-area plus-area';
+}
+
+.attribute {
+  grid-area: attribute;
+  text-align: center;
+  font-size: 100%;
+  font-family: Cinzel Decorative;
+}
+
+.minus-area {
+  grid-area: minus-area;
+  text-align: center;
+  height: 44px;
+  padding-right: 5px
+}
+
+.plus-area {
+  grid-area: plus-area;
+  text-align: center;
+  height: 44px;
+  padding-left: 5px
+}
+
+.fa-plus-circle, .fa-minus-circle {
+  color: $shark;
+  font-size: 44px;
+}
+
+.disabled-button {
+  color: $light-gray;
+}
+
+.attribute-quantity {
+  grid-area: count-area;
+  height: 44px;
+  text-align: center;
+  color: $attribute;
+  font-size: $more-massive-font;
+  font-weight: bold;
+  height: inherit;
+  border: 0;
+  background-color: lightgray;
+  border-radius: 3px;
+  justify-content: center;
+  //width: 100px;
+}

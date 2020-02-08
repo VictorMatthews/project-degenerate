@@ -1,0 +1,40 @@
+@import '../../assets/styles/variables';
+
+.characters {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 20% auto 80%;
+  grid-template-areas:
+    "character-list divider character-display";
+  height: 100%;
+  background-color: $accent1;
+}
+
+.divider {
+  grid-area: divider
+}
+
+.character-list {
+  grid-area: character-list;
+}
+
+.character-display {
+  //border-left: 1px solid $medium-gray;
+  grid-area: character-display;
+}
+
+.new-character-button {
+  color: $accent1;
+  background-color: $shark;
+  right: 20px;
+  bottom: 20px;
+  position: fixed;
+}
+
+.character-title {
+  font-family: Cinzel Decorative;
+  font-size: 125%;
+  text-align: center;
+  font-weight: bold;
+  margin: 5px 5px 5px 5px;
+}

@@ -1,0 +1,10 @@
+<div class="grid">
+  <div class="attribute">{{attribute.name}}</div>
+  <div class="minus-area">
+    <span class="fa fa-minus-circle" [ngClass]="disabled(false)" (click)="minus()"></span>
+  </div>
+  <div class="attribute-quantity">{{getAttributeValue()}}</div>
+  <div class="plus-area">
+    <span class="fa fa-plus-circle" [ngClass]="disabled(true)" (click)="plus()"></span>
+  </div>
+</div>

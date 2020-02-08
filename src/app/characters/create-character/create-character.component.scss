@@ -1,0 +1,35 @@
+@import '../../../assets/styles/variables';
+
+.left-side {
+  grid-area: left-side;
+}
+
+.right-side {
+  grid-area: right-side;
+}
+
+.pad-5 {
+  padding: 5px;
+}
+
+.close-button {
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 25% auto 75%;
+  grid-template-areas: "left-side divider right-side";
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  height: 100%;
+}
+
+.actions {
+  //height: 96px;
+}

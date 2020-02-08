@@ -1,1 +1,18 @@
-<generate-weapons></generate-weapons>
+<div class="main-content" [class.is-mobile]="ui.isMobile()">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #menu
+                 [opened]="ui.isMobile() ? false : true"
+                 [mode]="ui.isMobile() ? 'over' : 'side'"
+                 [fixedInViewport]="ui.isMobile()">
+      <app-menu></app-menu>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="hamburger">
+        <button mat-icon-button (click)="menu.toggle()">
+          <mat-icon fontSet="fas" fontIcon="fa-bars"></mat-icon>
+        </button>
+      </div>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

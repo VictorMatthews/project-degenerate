@@ -1,0 +1,113 @@
+@import '../../../assets/styles/variables';
+
+.character-info {
+  padding: 15px 20px 15px 20px;
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  grid-template-rows: 10% 30% auto;
+  grid-template-areas:
+    "race attributes skills"
+    "class attributes skills"
+    "background-info background-info skills";
+}
+
+.race {
+  grid-area: race;
+}
+
+.class {
+  grid-area: class;
+}
+
+.label {
+  font-family: Arial;
+  font-size: 22px;
+}
+
+.skills {
+  grid-area: skills;
+  font-family: Arial;
+  font-size: 20px;
+}
+
+.skill {
+  padding-bottom: 10px;
+  padding-left: 40px;
+  padding-top: 5px;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 10% auto;
+  grid-template-areas:
+    'skill-modifier skill-check';
+ }
+
+.skill-modifier {
+  grid-area: skill-modifier;
+  text-align: right;
+  margin-right: 10px;
+  margin-top: 3px;
+  border-bottom: 1px solid $medium-gray;
+}
+
+.skill-check {
+  grid-area: skill-check;
+  align: left;
+}
+
+.attributes {
+  grid-area: attributes;
+  font-family: Arial;
+  font-size: 26px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.attribute {
+  width: 33%;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+.attribute-mobile {
+  width: 50%;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+.attribute-value {
+  //grid-area: count-area;
+  height: 44px;
+  text-align: center;
+  color: $attribute;
+  font-size: $more-massive-font;
+  font-weight: bold;
+  height: inherit;
+  border: 0;
+  background-color: $light-gray;
+  border-radius: 3px;
+  justify-content: center;
+  margin: 5px 5px 5px 5px;
+  //width: 100px;
+}
+
+.background-info {
+  grid-area: background-info;
+  font-family: Arial;
+  font-size: 18px;
+}
+
+.info {
+  padding-bottom: 10px;
+}
+
+.skill-modifier {
+  text-align: right;
+  padding: 0px 10px 0px 10px;
+}
+
+.title {
+  text-align: center;
+  padding: 5px 5px 5px 5px;
+}

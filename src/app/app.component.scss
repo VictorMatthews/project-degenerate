@@ -1,0 +1,33 @@
+@import '../assets/styles/variables';
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.hamburger {
+  position: fixed;
+  z-index: 2;
+  background: rgba(128, 136, 144, 0.5);
+  border-radius: 0.35em;
+  top: 10px;
+  left: 10px;
+}
+
+.sidenav-container {
+  flex: 1;
+}
+
+.is-mobile .sidenav-container {
+  flex: 1 0 auto;
+}
+
+mat-sidenav {
+  width: 200px;
+  background: $menu url('/assets/images/overlay.png');
+}

@@ -1,0 +1,44 @@
+<div class="detailBackground">
+  <div class="grid">
+    <div class="title">{{class.classInfo.className}}</div>
+
+    <div class="header hit-point-header">Hit Points</div>
+
+    <div class="paragraph hit-die">
+      <strong>Hit Dice: </strong>{{getHitDice()}}
+    </div>
+
+    <div class="paragraph hit-point-level-one">
+      <strong>Hit Points at 1st Level: </strong>{{getHitPointLevelOne()}}
+    </div>
+
+    <div class="paragraph hit-point-higher-level">
+      <strong>Hit Points at Higher Levels: </strong>{{getHitPointHigherLevel()}}
+    </div>
+
+    <div class="header proficiencies-header">
+      Starting Proficiencies
+    </div>
+
+    <div class="paragraph proficiencies">
+      You are proficient with the following items, in addition to any proficiencies provided by your race or background.
+    </div>
+
+    <div class="paragraph armor">
+      <strong>Armor: </strong>{{class.classInfo.armor}}
+    </div>
+
+    <div class="paragraph weapons">
+      <strong>Weapons: </strong>{{class.classInfo.weapons}}
+    </div>
+
+    <div class="paragraph tools">
+      <strong>Tools: </strong>{{class.classInfo.tools}}
+    </div>
+
+    <div class="paragraph skills">
+      <strong>Skills: </strong>{{class.classInfo.getSkills()}}
+    </div>
+  </div>
+
+</div>

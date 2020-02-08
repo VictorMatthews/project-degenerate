@@ -1,0 +1,73 @@
+<div mat-dialog-title>
+  {{state.choiceMap.get(state.currentChoice).getString()}}
+</div>
+
+<div mat-dialog-content class="content">
+
+  <div class="grid" *ngIf="state.getCurrentChoice() === ui.CONSTANTS.RACE">
+    <div class="left-side">
+      <div *ngIf="state.races">
+        <div class="pad-5">
+          <app-race-card *ngFor="let race of state.races" [race]="race" (click)="state.selectRace(race)"></app-race-card>
+        </div>
+      </div>
+    </div>
+    <mat-divider class="divider" [vertical]="true"></mat-divider>
+    <div class="right-side">
+      <app-race-detail *ngIf="state.selectedRace" [race]="state.selectedRace"></app-race-detail>
+    </div>
+  </div>
+
+  <div class="grid" *ngIf="state.getCurrentChoice() === ui.CONSTANTS.SUB_RACE">
+    <div class="left-side">
+      <div *ngIf="state.subRaces">
+        <div class="pad-5">
+          <app-sub-race-card *ngFor="let subRace of state.subRaces" [subRace]="subRace" (click)="state.selectSubRace(subRace)"></app-sub-race-card>
+        </div>
+      </div>
+    </div>
+    <mat-divider class="divider" [vertical]="true"></mat-divider>
+    <div class="right-side">
+      <app-race-detail *ngIf="state.selectedSubRace" [race]="state.selectedSubRace"></app-race-detail>
+    </div>
+  </div>
+
+  <div class="grid" *ngIf="state.getCurrentChoice() === ui.CONSTANTS.CLASS">
+    <div class="left-side">
+      <div *ngIf="state.classes">
+        <div class="pad-5">
+          <app-class-card *ngFor="let class of state.classes" [class]="class" (click)="state.selectClass(class)"></app-class-card>
+        </div>
+      </div>
+    </div>
+    <mat-divider class="divider" [vertical]="true"></mat-divider>
+    <div class="right-side">
+      <app-class-detail *ngIf="state.selectedClass" [class]="state.selectedClass"></app-class-detail>
+    </div>
+  </div>
+
+  <div class="grid" *ngIf="state.getCurrentChoice() === ui.CONSTANTS.BACKGROUND">
+    <div class="left-side">
+      <div *ngIf="state.backgrounds">
+        <div class="pad-5">
+          <app-background-card *ngFor="let background of state.backgrounds" [background]="background" (click)="state.selectBackground(background)"></app-background-card>
+        </div>
+      </div>
+    </div>
+    <mat-divider class="divider" [vertical]="true"></mat-divider>
+    <div class="right-side">
+      <app-background-detail *ngIf="state.selectedBackground" [background]="state.selectedBackground"></app-background-detail>
+    </div>
+  </div>
+
+  <div class="content" *ngIf="state.getCurrentChoice() === ui.CONSTANTS.ATTRIBUTES_SKILLS">
+    <app-attribute-skill></app-attribute-skill>
+  </div>
+</div>
+
+<mat-dialog-actions align="end" class="actions">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="state.previous()" [disabled]="!state.canGoBack()">Previous</button>
+  <button mat-button (click)="state.next()" [disabled]="!state.canGoForward()">Next</button>
+  <button mat-button (click)="state.finish()" mat-dialog-close [disabled]="!state.readyToFinish()">Finish</button>
+</mat-dialog-actions>

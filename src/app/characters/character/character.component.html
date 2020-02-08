@@ -1,0 +1,73 @@
+<div class="character-info">
+
+  <div class="race-class">
+    <div class="race">
+      <label class="label">Race:</label>
+      {{getRace()}}
+    </div>
+    <div class="class">
+      <label class="label">Class: </label>
+      {{getClass()}}
+    </div>
+  </div>
+
+  <div class="attributes">
+    <div class="attribute strength" [class.attribute-mobile]="ui.isMobile()">
+      <div class="label">Strength</div>
+      <div class="attribute-value">{{getStrength()}}</div>
+    </div>
+    <div class="attribute dexterity" [class.attribute-mobile]="ui.isMobile()">
+      <div class="label">Dexterity</div>
+      <div class="attribute-value">{{getDexterity()}}</div>
+    </div>
+    <div class="attribute constitution" [class.attribute-mobile]="ui.isMobile()">
+      <div class="label">Constitution</div>
+      <div class="attribute-value">{{getConstitution()}}</div>
+    </div>
+    <div class="attribute intelligence" [class.attribute-mobile]="ui.isMobile()">
+      <div class="label">Intelligence</div>
+      <div class="attribute-value">{{getIntelligence()}}</div>
+    </div>
+    <div class="attribute wisdom" [class.attribute-mobile]="ui.isMobile()">
+      <div class="label">Wisdom</div>
+      <div class="attribute-value">{{getWisdom()}}</div>
+    </div>
+    <div class="attribute charisma" [class.attribute-mobile]="ui.isMobile()">
+      <div class="label">Charisma</div>
+      <div class="attribute-value">{{getCharisma()}}</div>
+    </div>
+  </div>
+
+  <div class="background-info">
+    <div class="info background">
+      <div class="label">Background</div>
+      {{getBackground()}}
+    </div>
+    <div class="info personalityTrait">
+      <div class="label">Personality Trait</div>
+      {{getPersonalityTrait()}}
+    </div>
+    <div class="info ideals">
+      <div class="label">Ideals</div>
+      {{getIdeals()}}
+    </div>
+    <div class="info bonds">
+      <div class="label">Bonds</div>
+      {{getBonds()}}
+    </div>
+    <div class="info flaws">
+      <div class="label">Flaws</div>
+      {{getFlaws()}}
+    </div>
+  </div>
+
+  <div class="skills">
+    <div class="title">{{ui.ID.SKILLS.getString()}}</div>
+    <div class="skill" *ngFor="let skill of skills">
+      <label class="skill-modifier">{{getSkillModifierForCharacter(skill)}}</label>
+      <mat-checkbox class="skill-check" [value]="skill.toString()"  [disabled]="true" [checked]="isProficientSKill(skill)" [name]="skill.toString()">
+        {{skill.toString() + ' (' + skill.attributeMod.name + ')'}}
+      </mat-checkbox>
+    </div>
+  </div>
+</div>

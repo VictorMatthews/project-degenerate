@@ -1,0 +1,6 @@
+<div class="grid">
+  <label class="skill-modifier">{{getSkillMod()}}</label>
+  <mat-checkbox class="skill-check" (click)="selectedSkill()" [value]="skill.toString()"  [disabled]="disabled()" [checked]="checked()" [name]="skill.toString()">
+    {{skill.toString() + ' (' + skill.attributeMod.name + ')'}}
+  </mat-checkbox>
+</div>
