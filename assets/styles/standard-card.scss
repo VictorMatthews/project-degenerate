@@ -1,0 +1,15 @@
+@import 'variables';
+
+.standard-card {
+  margin: 10px 10px 10px 10px;
+  border-radius: 4px;
+  text-align: center;
+  background: $card;
+  padding: 5px;
+  //height: 25px;
+  font-size: 125%;
+}
+
+.selected-card {
+  background: $selected-card;
+}
