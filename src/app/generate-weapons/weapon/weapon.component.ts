@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {GeneratedWeapon} from "./weapon.interfaces";
+import {WeaponsStateService} from "../weapons.state.service";
 
 @Component({
   selector: 'app-weapon',
@@ -10,7 +11,7 @@ export class WeaponComponent implements OnInit {
 
   @Input() weapon: GeneratedWeapon;
 
-  constructor() { }
+  constructor(public state: WeaponsStateService) { }
 
   ngOnInit() {
   }
@@ -22,4 +23,7 @@ export class WeaponComponent implements OnInit {
       ". This weapon is famous because " + this.weapon.famousFor;
   }
 
+  delete() {
+    this.state.weapons.splice(this.state.weapons.indexOf(this.weapon), 1);
+  }
 }

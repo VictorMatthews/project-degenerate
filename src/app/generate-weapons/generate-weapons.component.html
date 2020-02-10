@@ -1,7 +1,7 @@
 <div class="background">
   <div class="scroll">
     <div class="list-grid">
-      <div class="list-item" [class.list-item-mobile]="ui.isMobile()" *ngFor="let weapon of weapons">
+      <div class="list-item" [class.list-item-mobile]="ui.isMobile()" *ngFor="let weapon of state.weapons">
         <app-weapon [weapon]="weapon"></app-weapon>
       </div>
     </div>

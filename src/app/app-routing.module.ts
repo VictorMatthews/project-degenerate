@@ -5,10 +5,10 @@ import { GenerateWeaponsComponent } from "./generate-weapons/generate-weapons.co
 import { CharactersComponent } from "./characters/characters.component";
 
 const routes: Routes = [
-  // { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'weapons', component: GenerateWeaponsComponent },
   { path: 'characters', component: CharactersComponent },
-  { path: '**', redirectTo: 'characters' }
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

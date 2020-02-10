@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GeneratedWeapon } from './weapon/weapon.interfaces';
 import { GenerateWeaponsService } from "./generate-weapons.service";
 import { Ui } from "../shared/services/ui.service";
+import {WeaponsStateService} from "./weapons.state.service";
 
 @Component({
   selector: 'app-generate-weapons',
@@ -9,14 +9,13 @@ import { Ui } from "../shared/services/ui.service";
   styleUrls: ['./generate-weapons.component.scss']
 })
 export class GenerateWeaponsComponent implements OnInit {
-  weapons: GeneratedWeapon[] = [];
 
-  constructor(public service: GenerateWeaponsService, public ui: Ui) { }
+  constructor(public service: GenerateWeaponsService, public ui: Ui, public state: WeaponsStateService) { }
 
   ngOnInit() {
   }
 
   generateWeapon() {
-    this.weapons.push(this.service.generateWeapon());
+    this.state.weapons.push(this.service.generateWeapon());
   }
 }

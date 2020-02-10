@@ -18,7 +18,7 @@ export class CharactersComponent implements OnInit {
         this.state.promptForCharacterNameAndFinishCharacter(event.value);
       }
     });
-    // this.state.loadCharacters();
-    // this.state.selectFirstCharacter();
+    this.state.loadCharacters();
+    this.state.selectFirstCharacter();
   }
 }

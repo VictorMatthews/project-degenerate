@@ -1,6 +1,9 @@
-<mat-card class="weapon-card">
-  <mat-card-header class="weapon-card-header">
-    <mat-card-title>{{weapon.weaponType}}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>{{getWeaponDescription()}}</mat-card-content>
-</mat-card>
+<div class="weapon-card">
+  <div class="title">
+    {{weapon.weaponType}}
+    <button mat-icon-button class="close-button" (click)="delete()">
+      <span class="fa fa-window-close"></span>
+    </button>
+  </div>
+  <div class="content">{{getWeaponDescription()}}</div>
+</div>

@@ -5,8 +5,23 @@
   border-radius: 4px;
   background-color: $accent1;
   padding: 10px 10px 10px 10px;
+  position: relative;
 }
 
-.weapon-card-header {
-  color: $black;
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 125%;
+  font-family: Arial;
+  padding-bottom: 5px;
+  text-align: left;
+}
+
+.content {
+  font-size: 90%;
 }
