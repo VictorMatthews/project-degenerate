@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Class, Race} from "../../characters.interfaces";
 import {CreateCharacterStateService} from "../../create-character/create-character.state.service";
+import {Class} from "../../../shared/constants/character/classes";
 
 @Component({
   selector: 'app-class-card',

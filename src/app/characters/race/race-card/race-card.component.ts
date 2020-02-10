@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Race} from "../../characters.interfaces";
 import {CreateCharacterStateService} from "../../create-character/create-character.state.service";
+import {Race} from "../../../shared/constants/character/races";
 
 @Component({
   selector: 'app-race-card',

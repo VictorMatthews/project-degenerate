@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Background} from "../../characters.interfaces";
 import {CreateCharacterStateService} from "../../create-character/create-character.state.service";
 import {Ui} from "../../../shared/services/ui.service";
+import {Background} from "../../../shared/constants/character/backgrounds";
 
 @Component({
   selector: 'app-background-detail',

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {CreateCharacterStateService} from "../../create-character/create-character.state.service";
-import {SubRace} from "../../characters.interfaces";
+import {SubRace} from "../../../shared/constants/character/races";
 
 @Component({
     selector: 'app-sub-race-card',

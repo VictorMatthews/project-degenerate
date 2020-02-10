@@ -4,6 +4,12 @@ import { Paragraphs } from '../constants/paragraphs';
 import { Ids } from '../constants/ids';
 import { Subject } from 'rxjs';
 import { UiUtil } from './ui-util';
+import {Alignments} from "../constants/character/alignments";
+import {Attributes} from "../constants/character/attributes";
+import {Races, SubRaces} from "../constants/character/races";
+import {Skills} from "../constants/character/skills";
+import {Backgrounds, Bonds, Flaws, Ideals, PersonalityTraits} from "../constants/character/backgrounds";
+import {Classes} from "../constants/character/classes";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +19,17 @@ export class Ui {
   PARAGRAPHS = new Paragraphs();
   ID = new Ids();
   target = new Subject();
+  alignments = new Alignments();
+  attributes = new Attributes();
+  races = new Races();
+  subRaces = new SubRaces();
+  skills = new Skills();
+  backgrounds = new Backgrounds();
+  bonds = new Bonds();
+  flaws = new Flaws();
+  ideals = new Ideals();
+  personalityTraits = new PersonalityTraits();
+  classes = new Classes();
 
   constructor() {
     this.target.subscribe( id => {

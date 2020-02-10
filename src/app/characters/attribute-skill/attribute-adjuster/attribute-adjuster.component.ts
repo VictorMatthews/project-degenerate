@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Attribute, CharacterAttribute} from "../../characters.interfaces";
 import {CreateCharacterStateService} from "../../create-character/create-character.state.service";
 import {Ui} from "../../../shared/services/ui.service";
+import {Attribute} from "../../../shared/constants/character/attributes";
+import {CharacterAttribute} from "../../../shared/constants/character/races";
 
 @Component({
   selector: 'app-attribute-adjuster',
@@ -16,8 +17,8 @@ export class AttributeAdjusterComponent implements OnInit {
   constructor(public ui: Ui, public state: CreateCharacterStateService) { }
 
   ngOnInit() {
-    if (this.state.attributeValueMap.has(this.attribute)) {
-      this.attValue = this.state.attributeValueMap.get(this.attribute);
+    if (this.state.attributeValueMap.has(this.attribute.getId())) {
+      this.attValue = this.state.attributeValueMap.get(this.attribute.getId());
     } else {
       this.setStateAttributeValue();
     }
@@ -48,13 +49,13 @@ export class AttributeAdjusterComponent implements OnInit {
   }
 
   calcIncAttValue() {
-    if (this.state.attributeIncMap.has(this.attribute)) {
-      return this.state.attributeIncMap.get(this.attribute);
+    if (this.state.attributeIncMap.has(this.attribute.getId())) {
+      return this.state.attributeIncMap.get(this.attribute.getId());
     }
     let characterAttributes: CharacterAttribute[] = this.state.selectedRace.getIncreaseAttribute();
     for (let i = 0; i < characterAttributes.length; i++) {
       if (characterAttributes[i].attribute.getId() === this.attribute.getId()) {
-        this.state.attributeIncMap.set(this.attribute, characterAttributes[i].increaseValue);
+        this.state.attributeIncMap.set(this.attribute.getId(), characterAttributes[i].increaseValue);
         return characterAttributes[i].increaseValue;
       }
     }
@@ -62,12 +63,12 @@ export class AttributeAdjusterComponent implements OnInit {
       characterAttributes = this.state.selectedSubRace.getIncreaseAttribute();
       for (let i = 0; i < characterAttributes.length; i++) {
         if (characterAttributes[i].attribute.getId() === this.attribute.getId()) {
-          this.state.attributeIncMap.set(this.attribute, characterAttributes[i].increaseValue);
+          this.state.attributeIncMap.set(this.attribute.getId(), characterAttributes[i].increaseValue);
           return characterAttributes[i].increaseValue;
         }
       }
     }
-    this.state.attributeIncMap.set(this.attribute, 0);
+    this.state.attributeIncMap.set(this.attribute.getId(), 0);
     return 0;
   }
 
@@ -93,6 +94,6 @@ export class AttributeAdjusterComponent implements OnInit {
   }
 
   private setStateAttributeValue(): void {
-    this.state.attributeValueMap.set(this.attribute, this.attValue);
+    this.state.attributeValueMap.set(this.attribute.getId(), this.attValue);
   }
 }

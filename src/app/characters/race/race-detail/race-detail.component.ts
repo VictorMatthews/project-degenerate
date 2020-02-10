@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CharacterAttribute, CharacterConstants, Race} from "../../characters.interfaces";
 import {Ui} from "../../../shared/services/ui.service";
+import {CharacterAttribute, Race} from "../../../shared/constants/character/races";
 
 @Component({
   selector: 'app-race-detail',
@@ -19,7 +19,7 @@ export class RaceDetailComponent implements OnInit {
   getAbilityScoreIncrease() {
     let attributes: CharacterAttribute[] = this.race.getIncreaseAttribute();
     let scoreInc = "";
-    if (attributes.length === CharacterConstants.attributes.getAttributes().length) {
+    if (attributes.length === this.ui.attributes.getAttributes().length) {
       return "Your Ability Scores each increase by 1.";
     }
     for (let i = 0; i < attributes.length; i++) {

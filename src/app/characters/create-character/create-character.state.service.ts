@@ -1,20 +1,14 @@
 import { Injectable } from '@angular/core';
-import {
-  Alignment,
-  Attribute,
-  Background,
-  Bond,
-  Character, CharacterAttribute,
-  CharacterConstants,
-  Class,
-  Flaw,
-  Ideal, PersonalityTrait,
-  Race, Skill,
-  SubRace
-} from "../characters.interfaces";
 import {Constant} from "../../shared/constants/constants";
 import {Ui} from "../../shared/services/ui.service";
 import {EventHub} from "../../shared/services/EventHub";
+import {Character} from "../characters.interfaces";
+import {Attribute} from "../../shared/constants/character/attributes";
+import {Skill} from "../../shared/constants/character/skills";
+import {Race, SubRace} from "../../shared/constants/character/races";
+import {Class} from "../../shared/constants/character/classes";
+import {Background, Bond, Flaw, Ideal, PersonalityTrait} from "../../shared/constants/character/backgrounds";
+import {Alignment} from "../../shared/constants/character/alignments";
 
 @Injectable({
   providedIn: 'root'
@@ -26,16 +20,16 @@ export class CreateCharacterStateService {
   skillPoints: number;
 
   choiceMap: Map<number, Constant> = new Map;
-  attributeValueMap: Map<Attribute, number> = new Map;
-  attributeIncMap: Map<Attribute, number> = new Map;
-  selectedSkillsMap: Map<Skill, boolean> = new Map;
+  attributeValueMap: Map<number, number> = new Map;
+  attributeIncMap: Map<number, number> = new Map;
+  selectedSkillsMap: Map<number, boolean> = new Map;
 
-  races: Race[] = CharacterConstants.races.getRaces();
-  classes: Class[] = CharacterConstants.classes.getClasses();
-  backgrounds: Background[] = CharacterConstants.backgrounds.getBackgrounds();
-  attributes: Attribute[] = CharacterConstants.attributes.getAttributes();
-  skills: Skill[] = CharacterConstants.skills.getSkills();
-  alignments: Alignment[] = CharacterConstants.alignments.getAlignments();
+  races: Race[] = this.ui.races.getRaces();
+  classes: Class[] = this.ui.classes.getClasses();
+  backgrounds: Background[] = this.ui.backgrounds.getBackgrounds();
+  attributes: Attribute[] = this.ui.attributes.getAttributes();
+  skills: Skill[] = this.ui.skills.getSkills();
+  alignments: Alignment[] = this.ui.alignments.getAlignments();
 
   selectedRace: Race;
   selectedSubRace: SubRace;
@@ -173,7 +167,7 @@ export class CreateCharacterStateService {
 
   selectRace(race: Race) {
     this.selectedRace = race;
-    this.subRaces = CharacterConstants.subRaces.getSubRaces(race.getRaceId());
+    this.subRaces = this.ui.subRaces.getSubRaces(race.getRaceId());
     this.selectedSubRace = null;
     this.attributeIncMap.clear();
   }
@@ -190,10 +184,10 @@ export class CreateCharacterStateService {
 
   selectBackground(background: Background) {
     this.selectedBackground = background;
-    this.bonds = CharacterConstants.bonds.getBonds(this.selectedBackground);
-    this.flaws = CharacterConstants.flaws.getFlaws(this.selectedBackground);
-    this.ideals = CharacterConstants.ideals.getIdeals(this.selectedBackground);
-    this.personalityTraits = CharacterConstants.personalityTraits.getPersonalityTraits(this.selectedBackground);
+    this.bonds = this.ui.bonds.getBonds(this.selectedBackground);
+    this.flaws = this.ui.flaws.getFlaws(this.selectedBackground);
+    this.ideals = this.ui.ideals.getIdeals(this.selectedBackground);
+    this.personalityTraits = this.ui.personalityTraits.getPersonalityTraits(this.selectedBackground);
     this.selectedBond = null;
     this.selectedFlaw = null;
     this.selectedIdeal = null;
@@ -237,12 +231,12 @@ export class CreateCharacterStateService {
     // this.newCharacter.setFlaws(this.selectedFlaw.flaw);
     // this.newCharacter.setIdeals(this.selectedIdeal.ideal);
     // this.newCharacter.setPersonalityTrait(this.selectedPersonalityTrait.personalityTrait);
-    // this.newCharacter.setStrength(this.attributeValueMap.get(CharacterConstants.attributes.STRENGTH));
-    // this.newCharacter.setDexterity(this.attributeValueMap.get(CharacterConstants.attributes.DEXTERITY));
-    // this.newCharacter.setConstitution(this.attributeValueMap.get(CharacterConstants.attributes.CONSTITUTION));
-    // this.newCharacter.setIntelligence(this.attributeValueMap.get(CharacterConstants.attributes.INTELLIGENCE));
-    // this.newCharacter.setWisdom(this.attributeValueMap.get(CharacterConstants.attributes.WISDOM));
-    // this.newCharacter.setCharisma(this.attributeValueMap.get(CharacterConstants.attributes.CHARISMA));
+    // this.newCharacter.setStrength(this.attributeValueMap.get(this.ui.attributes.STRENGTH));
+    // this.newCharacter.setDexterity(this.attributeValueMap.get(this.ui.attributes.DEXTERITY));
+    // this.newCharacter.setConstitution(this.attributeValueMap.get(this.ui.attributes.CONSTITUTION));
+    // this.newCharacter.setIntelligence(this.attributeValueMap.get(this.ui.attributes.INTELLIGENCE));
+    // this.newCharacter.setWisdom(this.attributeValueMap.get(this.ui.attributes.WISDOM));
+    // this.newCharacter.setCharisma(this.attributeValueMap.get(this.ui.attributes.CHARISMA));
     // let profSkillIds: number[] = [];
     // for (let skill of this.selectedSkillsMap.keys()) {
     //   profSkillIds.push(skill.getId());
@@ -259,15 +253,15 @@ export class CreateCharacterStateService {
     this.newCharacter.flaws = (this.selectedFlaw.flaw);
     this.newCharacter.ideals = (this.selectedIdeal.ideal);
     this.newCharacter.personalityTraits = (this.selectedPersonalityTrait.personalityTrait);
-    this.newCharacter.strength = (this.attributeValueMap.get(CharacterConstants.attributes.STRENGTH));
-    this.newCharacter.dexterity = (this.attributeValueMap.get(CharacterConstants.attributes.DEXTERITY));
-    this.newCharacter.constitution = (this.attributeValueMap.get(CharacterConstants.attributes.CONSTITUTION));
-    this.newCharacter.intelligence = (this.attributeValueMap.get(CharacterConstants.attributes.INTELLIGENCE));
-    this.newCharacter.wisdom = (this.attributeValueMap.get(CharacterConstants.attributes.WISDOM));
-    this.newCharacter.charisma = (this.attributeValueMap.get(CharacterConstants.attributes.CHARISMA));
+    this.newCharacter.strength = (this.attributeValueMap.get(this.ui.attributes.STRENGTH.getId()));
+    this.newCharacter.dexterity = (this.attributeValueMap.get(this.ui.attributes.DEXTERITY.getId()));
+    this.newCharacter.constitution = (this.attributeValueMap.get(this.ui.attributes.CONSTITUTION.getId()));
+    this.newCharacter.intelligence = (this.attributeValueMap.get(this.ui.attributes.INTELLIGENCE.getId()));
+    this.newCharacter.wisdom = (this.attributeValueMap.get(this.ui.attributes.WISDOM.getId()));
+    this.newCharacter.charisma = (this.attributeValueMap.get(this.ui.attributes.CHARISMA.getId()));
     let profSkillIds: number[] = [];
     for (let skill of this.selectedSkillsMap.keys()) {
-      profSkillIds.push(skill.getId());
+      profSkillIds.push(skill);
     }
     this.newCharacter.profSkillIds = (profSkillIds);
     this.eventHub.broadcastNewEvent(EventHub.FINISH_NEW_CHARACTER, this.newCharacter);

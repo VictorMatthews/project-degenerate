@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Character, CharacterConstants, Skill } from "../characters.interfaces";
+import { Character } from "../characters.interfaces";
 import { Ui } from "../../shared/services/ui.service";
 import {CharactersStateService} from "../characters.state.service";
 import {SkillsService} from "../../shared/services/skills.service";
+import {Skill} from "../../shared/constants/character/skills";
 
 @Component({
   selector: 'app-character',
@@ -11,7 +12,7 @@ import {SkillsService} from "../../shared/services/skills.service";
 })
 export class CharacterComponent implements OnInit {
   @Input() character: Character;
-  skills: Skill[] = CharacterConstants.skills.getSkills();
+  skills: Skill[] = this.ui.skills.getSkills();
   readonly PROF_BONUS = 2;
 
   constructor(public ui: Ui, public state: CharactersStateService, public skillsService: SkillsService) { }
@@ -29,16 +30,16 @@ export class CharacterComponent implements OnInit {
 
   getStrength() {
     let inc = 0;
-    if (this.state.attributeIncMap.has(CharacterConstants.attributes.STRENGTH)) {
-      inc = this.state.attributeIncMap.get(CharacterConstants.attributes.STRENGTH);
+    if (this.state.attributeIncMap.has(this.ui.attributes.STRENGTH.getId())) {
+      inc = this.state.attributeIncMap.get(this.ui.attributes.STRENGTH.getId());
     }
     return this.character.strength + inc;
   }
 
   getDexterity() {
     let inc = 0;
-    if (this.state.attributeIncMap.has(CharacterConstants.attributes.DEXTERITY)) {
-      inc = this.state.attributeIncMap.get(CharacterConstants.attributes.DEXTERITY);
+    if (this.state.attributeIncMap.has(this.ui.attributes.DEXTERITY.getId())) {
+      inc = this.state.attributeIncMap.get(this.ui.attributes.DEXTERITY.getId());
     }
     return this.character.dexterity + inc;
 
@@ -46,8 +47,8 @@ export class CharacterComponent implements OnInit {
 
   getConstitution() {
     let inc = 0;
-    if (this.state.attributeIncMap.has(CharacterConstants.attributes.CONSTITUTION)) {
-      inc = this.state.attributeIncMap.get(CharacterConstants.attributes.CONSTITUTION);
+    if (this.state.attributeIncMap.has(this.ui.attributes.CONSTITUTION.getId())) {
+      inc = this.state.attributeIncMap.get(this.ui.attributes.CONSTITUTION.getId());
     }
     return this.character.constitution + inc;
 
@@ -55,8 +56,8 @@ export class CharacterComponent implements OnInit {
 
   getIntelligence() {
     let inc = 0;
-    if (this.state.attributeIncMap.has(CharacterConstants.attributes.INTELLIGENCE)) {
-      inc = this.state.attributeIncMap.get(CharacterConstants.attributes.INTELLIGENCE);
+    if (this.state.attributeIncMap.has(this.ui.attributes.INTELLIGENCE.getId())) {
+      inc = this.state.attributeIncMap.get(this.ui.attributes.INTELLIGENCE.getId());
     }
     return this.character.intelligence + inc;
 
@@ -64,8 +65,8 @@ export class CharacterComponent implements OnInit {
 
   getWisdom() {
     let inc = 0;
-    if (this.state.attributeIncMap.has(CharacterConstants.attributes.WISDOM)) {
-      inc = this.state.attributeIncMap.get(CharacterConstants.attributes.WISDOM);
+    if (this.state.attributeIncMap.has(this.ui.attributes.WISDOM.getId())) {
+      inc = this.state.attributeIncMap.get(this.ui.attributes.WISDOM.getId());
     }
     return this.character.wisdom + inc;
 
@@ -73,8 +74,8 @@ export class CharacterComponent implements OnInit {
 
   getCharisma() {
     let inc = 0;
-    if (this.state.attributeIncMap.has(CharacterConstants.attributes.CHARISMA)) {
-      inc = this.state.attributeIncMap.get(CharacterConstants.attributes.CHARISMA);
+    if (this.state.attributeIncMap.has(this.ui.attributes.CHARISMA.getId())) {
+      inc = this.state.attributeIncMap.get(this.ui.attributes.CHARISMA.getId());
     }
     return this.character.charisma + inc;
 
@@ -123,22 +124,22 @@ export class CharacterComponent implements OnInit {
   }
 
   private getSkillValue(skill: Skill): number {
-    if (skill.getAttributeMod().equals(CharacterConstants.attributes.STRENGTH)) {
+    if (skill.getAttributeMod().equals(this.ui.attributes.STRENGTH)) {
       return this.getStrength();
     }
-    if (skill.getAttributeMod().equals(CharacterConstants.attributes.DEXTERITY)) {
+    if (skill.getAttributeMod().equals(this.ui.attributes.DEXTERITY)) {
       return this.getDexterity();
     }
-    if (skill.getAttributeMod().equals(CharacterConstants.attributes.CONSTITUTION)) {
+    if (skill.getAttributeMod().equals(this.ui.attributes.CONSTITUTION)) {
       return this.getConstitution();
     }
-    if (skill.getAttributeMod().equals(CharacterConstants.attributes.INTELLIGENCE)) {
+    if (skill.getAttributeMod().equals(this.ui.attributes.INTELLIGENCE)) {
       return this.getIntelligence();
     }
-    if (skill.getAttributeMod().equals(CharacterConstants.attributes.WISDOM)) {
+    if (skill.getAttributeMod().equals(this.ui.attributes.WISDOM)) {
       return this.getWisdom();
     }
-    if (skill.getAttributeMod().equals(CharacterConstants.attributes.CHARISMA)) {
+    if (skill.getAttributeMod().equals(this.ui.attributes.CHARISMA)) {
       return this.getCharisma();
     }
   }

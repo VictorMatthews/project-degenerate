@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Class} from "../../characters.interfaces";
+import {Class} from "../../../shared/constants/character/classes";
 
 @Component({
   selector: 'app-class-detail',

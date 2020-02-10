@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CharactersStateService} from "../characters.state.service";
-import {Character, CharacterConstants} from "../characters.interfaces";
+import {Character} from "../characters.interfaces";
+import {Ui} from "../../shared/services/ui.service";
 
 @Component({
   selector: 'app-character-card',
@@ -11,7 +12,7 @@ export class CharacterCardComponent implements OnInit {
 
   @Input() character: Character;
 
-  constructor(public state: CharactersStateService) { }
+  constructor(public ui: Ui, public state: CharactersStateService) { }
 
   ngOnInit() {
   }
@@ -21,15 +22,15 @@ export class CharacterCardComponent implements OnInit {
   }
 
   public getRace(): string {
-    let race = CharacterConstants.races.getRaceById(this.character.raceId);
+    let race = this.ui.races.getRaceById(this.character.raceId);
     let raceName = race.getRaceName();
     if (race.hasSubRaces) {
-      raceName = CharacterConstants.subRaces.getSubRaceById(this.character.subRaceId).getSubRaceName();
+      raceName = this.ui.subRaces.getSubRaceById(this.character.subRaceId).getSubRaceName();
     }
     return raceName;
   }
 
   getClass() {
-    return CharacterConstants.classes.getClassById(this.character.classId).className;
+    return this.ui.classes.getClassById(this.character.classId).className;
   }
 }

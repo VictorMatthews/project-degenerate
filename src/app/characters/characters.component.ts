@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Character, CharacterAttribute} from "./characters.interfaces";
 import {CharactersStateService} from "./characters.state.service";
 import {Ui} from "../shared/services/ui.service";
 import {EventHub, EventHubEvent} from "../shared/services/EventHub";
