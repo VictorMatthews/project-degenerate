@@ -4,6 +4,8 @@ D&amp;D Weapon Generator & Character Creator
 
 This is a weapon generator for any game master looking for some magical loot. As well as a character creator to help players easily build characters
 
+You can test it out here https://victormmatthews.me/project-degenerate/
+
 ## How to run this app
 
 First to run this app you will need [npm](https://www.npmjs.com/get-npm) and [git](https://git-scm.com/downloads) (unless you download the [zip](https://github.com/VictorMatthews/project-degenerate/archive/master.zip) from GitHub) 
